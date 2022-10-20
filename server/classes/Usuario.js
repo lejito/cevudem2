@@ -181,4 +181,40 @@ export class Usuario {
             return error
         }
     }
+
+    async verificar() {
+        try {
+            const [result1] = await pool.query(
+                "SELECT COUNT(*) as num FROM usuarios WHERE documento = ? AND tipo_documento = ?",
+                [
+                    this.documento,
+                    this.tipodoc,
+                ]
+            )
+
+            const [result2] = await pool.query(
+                "SELECT COUNT(*) as num FROM usuarios WHERE documento = ? AND clave= ?",
+                [
+                    this.documento,
+                    this.clave
+                ]
+            )
+
+            const [result3] = await pool.query(
+                "SELECT bloqueo FROM usuarios WHERE documento = ?",
+                [
+                    this.documento,
+                ]
+            )
+
+            const verifDocumento = result1[0].num === 1
+            const verifClave = result2[0].num === 1
+            const verifBloqueo = result3[0] ? result3[0].bloqueo == 0 : false
+            return [verifDocumento, verifClave, verifBloqueo]
+        }
+        catch (error) {
+            console.log(error)
+            return error
+        }
+    }
 }

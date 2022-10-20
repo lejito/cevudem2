@@ -7,6 +7,7 @@ import {
     actualizarUsuarioDatosDocumento,
     actualizarUsuarioDatosPersonales,
     actualizarUsuarioDatosSeguridad,
+    verificarUsuario
 } from '../controllers/usuarios.controllers.js'
 
 const router = Router()
@@ -19,10 +20,12 @@ router.post("/usuarios", insertarUsuario)
 
 router.put("/usuarios/:documento", actualizarUsuario)
 
-router.put("/usuarios/d/:documento", actualizarUsuarioDatosDocumento)
+router.put("/usuarios-doc/:documento", actualizarUsuarioDatosDocumento)
 
-router.put("/usuarios/p/:documento", actualizarUsuarioDatosPersonales)
+router.put("/usuarios-per/:documento", actualizarUsuarioDatosPersonales)
 
-router.put("/usuarios/s/:documento", actualizarUsuarioDatosSeguridad)
+router.put("/usuarios-seg/:documento", actualizarUsuarioDatosSeguridad)
+
+router.get("/usuarios-ver/", verificarUsuario)
 
 export default router

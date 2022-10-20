@@ -105,4 +105,16 @@ export const actualizarUsuarioDatosSeguridad = async (req, res) => {
     else {
         res.status(500).json({ error: respuesta.message })
     }
-} 
+}
+
+export const verificarUsuario = async (req, res) => {
+    const usuario = new Usuario(req.body)
+    const respuesta = await usuario.verificar()
+
+    if (respuesta.length === 3) {
+        res.json(respuesta)
+    }
+    else {
+        res.status(500).json({ error: respuesta.message })
+    }
+}
