@@ -26,6 +26,6 @@ router.put("/usuarios-per/:documento", actualizarUsuarioDatosPersonales)
 
 router.put("/usuarios-seg/:documento", actualizarUsuarioDatosSeguridad)
 
-router.get("/usuarios-ver/", verificarUsuario)
+router.post("/usuarios-ver", verificarUsuario)
 
 export default router
