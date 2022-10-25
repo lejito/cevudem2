@@ -76,12 +76,21 @@ function FormLogin() {
         >
             {({ handleChange, handleSubmit, values, isSubmitting }) => (
                 <Form onSubmit={handleSubmit}>
+<<<<<<< HEAD
                     <label className="block text-sm">
                         <span className="text-dark">
                             Tipo de documento
                         </span>
                         <select
                             className="block w-full mt-1 text-sm form-select focus:border-primary focus:outline-none focus:shadow-outline-primary"
+=======
+                    <label class="block text-sm">
+                        <span class="text-dark">
+                            Tipo de documento
+                        </span>
+                        <select
+                            class="block w-full mt-1 text-sm form-select focus:border-primary focus:outline-none focus:shadow-outline-primary"
+>>>>>>> c75465178b882911dd406a763d3c575b0332714a
                             name="tipo_documento"
                             required
                             onChange={handleChange}
