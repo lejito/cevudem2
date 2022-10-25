@@ -143,6 +143,11 @@ function InicioPage() {
                 <th className="px-4 py-3">Date</th>
               </tr>
             </thead>
+<<<<<<< HEAD
+            
+          </table>
+        </div>
+=======
             <tbody
               className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
             >
@@ -603,6 +608,7 @@ function InicioPage() {
             </nav>
           </span>
         </div>
+>>>>>>> c75465178b882911dd406a763d3c575b0332714a
       </div>
     </div>
   )

@@ -10,7 +10,11 @@ function Aside() {
             <div className="py-4 text-light">
                 <img
                     className="ml-6"
+<<<<<<< HEAD
+                    src="http://127.0.0.1:5173/src/assets/img/Logo_UdeMedellin_Contraste.png"
+=======
                     src="./src/assets/img/Logo_UdeMedellin_Contraste.png"
+>>>>>>> c75465178b882911dd406a763d3c575b0332714a
                 />
 
                 <ul className="mt-6">
@@ -26,7 +30,11 @@ function Aside() {
                                 ></span>
                             ) : null}
                             < FontAwesomeIcon icon={faHome} />
+<<<<<<< HEAD
+                            <span className="ml-4">Inicio</span>
+=======
                             <span className="ml-4">Dashboard</span>
+>>>>>>> c75465178b882911dd406a763d3c575b0332714a
                         </Link>
                     </li>
                 </ul>
@@ -35,15 +43,95 @@ function Aside() {
                     <li className="relative px-6 py-3">
                         <Link
                             className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray"
+<<<<<<< HEAD
+                            to="/dashboard/personas"
+                        >
+                            {useLocation().pathname === "/dashboard/personas" ? (
+=======
                             to="/dashboard/equipo"
                         >
                             {useLocation().pathname === "/dashboard/equipo" ? (
+>>>>>>> c75465178b882911dd406a763d3c575b0332714a
                                 <span
                                     className="absolute inset-y-0 left-0 w-1 bg-primary rounded-tr-lg rounded-br-lg"
                                     aria-hidden="true"
                                 ></span>
                             ) : null}
                             <FontAwesomeIcon icon={faUsers} />
+<<<<<<< HEAD
+                            <span className="ml-4">Personas</span>
+                        </Link>
+                    </li>
+ 
+                    <div>
+                        <h2 style={{textAlign: "center"}}>Casa club del egresado</h2>
+                     </div>
+
+                    <li className="relative px-6 py-3">
+                    <Link
+                            className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray"
+                            to="/dashboard/reservasclub"
+                        >
+                            {useLocation().pathname === "/dashboard/reservasclub" ? (
+                                <span
+                                    className="absolute inset-y-0 left-0 w-1 bg-primary rounded-tr-lg rounded-br-lg"
+                                    aria-hidden="true"
+                                ></span>
+                            ) : null}
+                            <FontAwesomeIcon icon={faUsers} />
+                            <span className="ml-4">Reservas</span>
+                        </Link>
+                    </li>
+                    <li className="relative px-6 py-3">
+                    <Link
+                            className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray"
+                            to="/dashboard/eventosclub"
+                        >
+                            {useLocation().pathname === "/dashboard/eventosclub" ? (
+                                <span
+                                    className="absolute inset-y-0 left-0 w-1 bg-primary rounded-tr-lg rounded-br-lg"
+                                    aria-hidden="true"
+                                ></span>
+                            ) : null}
+                            <FontAwesomeIcon icon={faUsers} />
+                            <span className="ml-4">Eventos</span>
+                        </Link>
+                    </li>
+
+                    <div>
+                        <h2 style={{textAlign: "center"}}>Vivienda Vives</h2>
+                     </div>
+
+                    <li className="relative px-6 py-3">
+                    <Link
+                            className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray"
+                            to="/dashboard/solicitudesvives"
+                        >
+                            {useLocation().pathname === "/dashboard/solicitudesvives" ? (
+                                <span
+                                    className="absolute inset-y-0 left-0 w-1 bg-primary rounded-tr-lg rounded-br-lg"
+                                    aria-hidden="true"
+                                ></span>
+                            ) : null}
+                            <FontAwesomeIcon icon={faUsers} />
+                            <span className="ml-4">Solicitudes</span>
+                        </Link>
+                    </li>
+                    <li className="relative px-6 py-3">
+                    <Link
+                            className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray"
+                            to="/dashboard/contratosvives"
+                        >
+                            {useLocation().pathname === "/dashboard/contratosvives" ? (
+                                <span
+                                    className="absolute inset-y-0 left-0 w-1 bg-primary rounded-tr-lg rounded-br-lg"
+                                    aria-hidden="true"
+                                ></span>
+                            ) : null}
+                            <FontAwesomeIcon icon={faUsers} />
+                            <span className="ml-4">Contratos</span>
+                        </Link>
+=======
                             <span className="ml-4">Equipo</span>
                         </Link>
                     </li>
@@ -156,6 +244,7 @@ function Aside() {
                             </svg>
                             <span className="ml-4">Tables</span>
                         </a>
+>>>>>>> c75465178b882911dd406a763d3c575b0332714a
                     </li>
                 </ul>
             </div>

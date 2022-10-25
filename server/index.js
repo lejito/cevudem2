@@ -11,7 +11,11 @@ const app = express()
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 app.use(cors({
+<<<<<<< HEAD
+    origin: "http://127.0.0.1:5173"
+=======
     origin: "http://localhost:5173"
+>>>>>>> c75465178b882911dd406a763d3c575b0332714a
 }))
 
 app.use(express.json())
