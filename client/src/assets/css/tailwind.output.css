@@ -1478,6 +1478,14 @@ print and (-ms-high-contrast:none) {
     padding-left: 2.5rem
 }
 
+.pt-2 {
+    padding-top: 0.5rem
+}
+
+.pt-4 {
+    padding-top: 1rem
+}
+
 .pb-16 {
     padding-bottom: 4rem
 }
@@ -2226,4 +2234,15 @@ print and (-ms-high-contrast:none) {
     .xl\:grid-cols-4 {
         grid-template-columns: repeat(4, minmax(0, 1fr))
     }
+}
+
+/* ESTILOS PERSONALIZADOS uppercase pl-2 pt-4 text-sm  */
+
+.a-section {
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: #7a7a7a;
+    font-size: .80rem;
+    padding-left: 1rem;
+    padding-top: 1rem;
 }

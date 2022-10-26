@@ -5,15 +5,11 @@ import { Routes, Route, Link, useNavigate } from 'react-router-dom'
 import InicioPage from '../pages/InicioPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import AjustesPage from '../pages/AjustesPage'
-<<<<<<< HEAD
 import PersonasPage from '../pages/PersonasPage'
-import ReservasclubPage from '../pages/ReservasclubPage'
-import EventosclubPage from '../pages/EventosclubPage'
-import SolicitudesvivesPage from '../pages/SolicitudesvivesPage'
-import ContratosvivesPage from '../pages/ContratosvivesPage'
-=======
-import EquipoPage from '../pages/EquipoPage'
->>>>>>> c75465178b882911dd406a763d3c575b0332714a
+import ReservasClubPage from '../pages/ReservasClubPage'
+import EventosClubPage from '../pages/EventosClubPage'
+import SolicitudesVivesPage from '../pages/SolicitudesVivesPage'
+import ContratosVivesPage from '../pages/ContratosVivesPage'
 import Aside from './Aside'
 import Header from './Header'
 
@@ -41,15 +37,11 @@ function Dashboard() {
                     <Routes>
                         <Route path="/" element={<InicioPage />} />
                         <Route path="/ajustes" element={<AjustesPage />} />
-<<<<<<< HEAD
                         <Route path="/personas" element={<PersonasPage />} />
-                        <Route path="/reservasclub" element={<ReservasclubPage />} />
-                        <Route path="/eventosclub" element={<EventosclubPage />} />
-                        <Route path="/solicitudesvives" element={<SolicitudesvivesPage />} />
-                        <Route path="/contratosvives" element={<ContratosvivesPage />} />
-=======
-                        <Route path="/equipo" element={<EquipoPage />} />
->>>>>>> c75465178b882911dd406a763d3c575b0332714a
+                        <Route path="/reservas-club" element={<ReservasClubPage />} />
+                        <Route path="/eventos-club" element={<EventosClubPage />} />
+                        <Route path="/solicitudes-vives" element={<SolicitudesVivesPage />} />
+                        <Route path="/contratos-vives" element={<ContratosVivesPage />} />
                         <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                 </main>
