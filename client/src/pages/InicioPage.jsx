@@ -1,11 +1,13 @@
 import { useEffect } from 'react'
 import { useAppContext } from '../context/Provider'
 import { Link, useNavigate } from 'react-router-dom'
+import TableComponent from '../components/TableComponent'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
 function InicioPage() {
-  const { sesion, logout } = useAppContext()
+
+  const { sesion } = useAppContext()
 
   const navigate = useNavigate()
 
@@ -14,6 +16,65 @@ function InicioPage() {
       navigate("/login")
     }
   }, [])
+
+  const columns = [
+    {
+      id: 'documento',
+      label: 'Documento',
+      minWidth: 170
+    },
+    {
+      id: 'nombre_completo',
+      label: 'Nombre Completo',
+      minWidth: 100
+    },
+    {
+      id: 'correo_electronico',
+      label: 'Correo Electrónico',
+      minWidth: 170,
+      align: 'right',
+    },
+    {
+      id: 'telefono',
+      label: 'Teléfono',
+      minWidth: 170,
+      align: 'right',
+    },
+    {
+      id: 'rol',
+      label: 'Rol',
+      minWidth: 170,
+      align: 'right',
+    },
+    {
+      id: 'opciones',
+      label: 'Opciones',
+      minWidth: 170,
+      align: 'right',
+    },
+  ];
+
+  function createData(documento, nombre_completo, correo_electronico, telefono, rol, opciones) {
+    return { documento, nombre_completo, correo_electronico, telefono, rol, opciones};
+  }
+
+  const rows = [
+    createData('India', 'IN', 1324171354, 3287263, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('China', 'CN', 1403500365, 9596961, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('Italy', 'IT', 60483973, 301340, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('United States', 'US', 327167434, 9833520, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('Canada', 'CA', 37602103, 9984670, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('Australia', 'AU', 25475400, 7692024, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('Germany', 'DE', 83019200, 357578, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('Ireland', 'IE', 4857000, 70273, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('Mexico', 'MX', 126577691, 1972550, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('Japan', 'JP', 126317000, 377973, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('France', 'FR', 67022000, 640679, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('United Kingdom', 'GB', 67545757, 242495, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('Russia', 'RU', 146793744, 17098246, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('Nigeria', 'NG', 200962417, 923768, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData('Brazil', 'BR', 210147125, 8515767, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+  ];
 
   return (
     <div className="container px-6 mx-auto grid">
@@ -40,12 +101,12 @@ function InicioPage() {
             <p
               className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
             >
-              Total clients
+              Usuarios Creados
             </p>
             <p
               className="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-              6389
+              20
             </p>
           </div>
         </div>
@@ -67,12 +128,12 @@ function InicioPage() {
             <p
               className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
             >
-              Account balance
+              Reservas creadas
             </p>
             <p
               className="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-              $ 46,760.89
+              100
             </p>
           </div>
         </div>
@@ -92,12 +153,12 @@ function InicioPage() {
             <p
               className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
             >
-              New sales
+              Contratos creados
             </p>
             <p
               className="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-              376
+              60
             </p>
           </div>
         </div>
@@ -119,7 +180,7 @@ function InicioPage() {
             <p
               className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
             >
-              Pending contacts
+              Contactos Pendientes
             </p>
             <p
               className="text-lg font-semibold text-gray-700 dark:text-gray-200"
@@ -130,25 +191,29 @@ function InicioPage() {
         </div>
       </div>
 
+      <div className="flex mb-4">
+        <button class="inline-flex items-center mr-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
+          style={{
+            backgroundColor: 'rgb(99 102 241)',
+            color: 'white'
+          }}>
+          <FontAwesomeIcon icon={faUserPlus} class="h-5 w-5 mr-2" />
+          Crear Usuario
+        </button>
+      </div>
+
       <div className="w-full overflow-hidden rounded-lg shadow-xs mb-8">
+
         <div className="w-full overflow-x-auto">
-          <table className="w-full whitespace-no-wrap">
-            <thead>
-              <tr
-                className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
-              >
-                <th className="px-4 py-3">Client</th>
-                <th className="px-4 py-3">Amount</th>
-                <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3">Date</th>
-              </tr>
-            </thead>
-            
-          </table>
+          <TableComponent columns={columns} rows={rows} />
+
         </div>
       </div>
     </div>
+
   )
+
+
 }
 
 export default InicioPage

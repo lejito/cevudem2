@@ -24,8 +24,10 @@ function TableComponent({ columns, rows }) {
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
-            backgroundColor: 'lightgray',
-            color: theme.palette.common.black,
+            backgroundColor: '#C92534',
+            color: 'white',
+            fontWeight: 'bolder',
+            fontFamily: "Ubuntu",
             fontSize: 16
         },
     }));
