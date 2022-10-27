@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Dropdown, Avatar } from "flowbite-react"
+import userPicture from '../assets/img/user.png'
 
 function Header() {
 
@@ -10,37 +11,50 @@ function Header() {
     return (
         <header className="z-10 py-4 bg-white shadow-md">
             <div
-                className="container flex items-center justify-between h-full px-6 mx-auto text-purple-600"
+                className="container flex items-center justify-around px-6 mx-auto text-purple-600 relative"
+                style={{
+                    minHeight: 35
+                }}
             >
-                <div>
-                    <Dropdown
-                        label={<Avatar style={{width: '50%', height: '50%'}} alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded={true} />}
-                        arrowIcon={false}
-                        inline={true}
-                        onFocus={false}
-                    >
-                        <Dropdown.Header>
-                            <span className="block text-sm">
-                                Bonnie Green
-                            </span>
-                            <span className="block truncate text-sm font-medium">
-                                name@flowbite.com
-                            </span>
-                        </Dropdown.Header>
-                        <Dropdown.Item>
-                            Dashboard
-                        </Dropdown.Item>
-                        <Dropdown.Item>
-                            Settings
-                        </Dropdown.Item>
-                        <Dropdown.Item>
-                            Earnings
-                        </Dropdown.Item>
-                        <Dropdown.Divider />
-                        <Dropdown.Item>
-                            Sign out
-                        </Dropdown.Item>
-                    </Dropdown>
+                <div
+                    className="container flex items-center justify-around px-6 mx-auto text-purple-600 relative"
+                    style={{ width: 125, height: 125 }}>
+                    <img
+                        className="ml-6"
+                        src="http://localhost:5173/src/assets/img/Logo_Vives.png"
+                    />
+                    <img
+                        className="ml-6"
+                        src="http://localhost:5173/src/assets/img/Logo_Club_Egresado.png"
+                    />
+                </div>
+
+
+
+                <div className="absolute top-10 right-0 mr-5">
+                    <Avatar style={{ width: 80, height: 80 }} alt="User settings" img={userPicture} rounded={true}>
+                        <Dropdown
+                            arrowIcon={true}
+                            inline={true}
+                            onFocus={false}
+                        >
+                            <Dropdown.Header>
+                                <span className="block text-sm">
+                                    Luis Aristizabal
+                                </span>
+                            </Dropdown.Header>
+                            <Dropdown.Item>
+                                Perfil
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                Configuraciones
+                            </Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item>
+                                Cerrar sesion
+                            </Dropdown.Item>
+                        </Dropdown>
+                    </Avatar>
                 </div>
             </div>
         </header>
