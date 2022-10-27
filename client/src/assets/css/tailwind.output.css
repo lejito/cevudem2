@@ -672,9 +672,9 @@ print and (-ms-high-contrast:none) {
     background-color: rgba(224, 36, 36, var(--bg-opacity))
 }
 
-.bg-orange-100 {
+.bg-orange {
     --bg-opacity: 1;
-    background-color: #feecdc;
+    background-color: orange;
     background-color: rgba(254, 236, 220, var(--bg-opacity))
 }
 

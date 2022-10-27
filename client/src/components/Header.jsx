@@ -16,20 +16,17 @@ function Header() {
                     minHeight: 35
                 }}
             >
-                <div
-                    className="container flex items-center justify-around px-6 mx-auto text-purple-600 relative"
-                    style={{ width: 125, height: 125 }}>
-                    <img
-                        className="ml-6"
-                        src="http://localhost:5173/src/assets/img/Logo_Vives.png"
-                    />
-                    <img
-                        className="ml-6"
-                        src="http://localhost:5173/src/assets/img/Logo_Club_Egresado.png"
-                    />
+                <div className="top-10 mr-5">
+                    <div class="relative">
+                        <img style={{ width: 50 }} alt="User settings" class="!rounded-full rounded w-10 h-10 rounded" src="/src/assets/img/Logo_Club_Egresado.png" />
+                    </div>
                 </div>
 
-
+                <div className="top-10 mr-5">
+                    <div class="relative">
+                        <img style={{ width: 50 }} alt="User settings" class="!rounded-full rounded w-10 h-10 rounded" src="/src/assets/img/Logo_Vives.png" />
+                    </div>
+                </div>
 
                 <div className="absolute top-10 right-0 mr-5">
                     <Avatar style={{ width: 80, height: 80 }} alt="User settings" img={userPicture} rounded={true}>
