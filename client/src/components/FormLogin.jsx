@@ -1,17 +1,12 @@
 import { useEffect } from 'react'
 import { Form, Formik } from 'formik'
-import { toast } from 'react-toastify';
 import { useAppContext } from '../context/Provider'
 import { useNavigate } from 'react-router-dom'
 import md5 from 'md5'
 
 function FormLogin() {
 
-    const notifSuccess = (message, id) => toast.success(message, { toastId: id })
-    const notifWarning = (message, id) => toast.warning(message, { toastId: id })
-    const notifError = (message, id) => toast.error(message, { toastId: id })
-
-    const { verificarUsuario, buscarUsuario, sesion, setSesion } = useAppContext()
+    const { verificarUsuario, buscarUsuario, sesion, setSesion, notif } = useAppContext()
 
     const navigate = useNavigate()
 
@@ -41,28 +36,28 @@ function FormLogin() {
                 const respuesta = await verificarUsuario(usuario)
 
                 if (respuesta.error) {
-                    notifError("Ha ocurrido un error en el sistema al validar los datos.")
+                    notif("error", "Ha ocurrido un error en el sistema al validar los datos.", 0)
                 }
                 else {
                     const [verifDocumento, verifClave, verifBloqueo] = respuesta
 
                     if (verifDocumento === false) {
-                        notifWarning("El usuario ingresado no existe. Verifica el tipo y número de documento.", 1)
+                        notif("warning", "El usuario ingresado no existe. Verifica el tipo y número de documento.", 1)
                     }
                     else if (verifClave === false) {
-                        notifWarning("La contraseña ingresada es incorrecta.", 2)
+                        notif("warning", "La contraseña ingresada es incorrecta.", 2)
                     }
                     else if (verifBloqueo === false) {
-                        notifWarning("El usuario ingresado no tiene permisos para acceder al sistema.", 3)
+                        notif("warning", "El usuario ingresado no tiene permisos para acceder al sistema.", 3)
                     }
                     else {
                         const datosSesion = await buscarUsuario(usuario.documento)
 
                         if (datosSesion.error) {
-                            notifError("Ha ocurrido un error en el sistema al iniciar sesión.")
+                            notif("error", "Ha ocurrido un error en el sistema al iniciar sesión.")
                         }
                         else {
-                            notifSuccess("Sesión iniciada correctamente. ¡Bienvenid@!", 4)
+                            notif("success", "Sesión iniciada correctamente. ¡Bienvenid@!", 4)
                             localStorage.setItem(
                                 'loggedAppUser', JSON.stringify(datosSesion)
                             )

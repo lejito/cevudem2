@@ -1,11 +1,13 @@
 import { useEffect } from 'react'
 import { useAppContext } from '../context/Provider'
 import { Link, useNavigate } from 'react-router-dom'
+import TableComponent from '../components/TableComponent'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
 function InicioPage() {
-  const { sesion, logout } = useAppContext()
+
+  const { sesion } = useAppContext()
 
   const navigate = useNavigate()
 
@@ -14,6 +16,8 @@ function InicioPage() {
       navigate("/login")
     }
   }, [])
+
+
 
   return (
     <div className="container px-6 mx-auto grid">
@@ -40,12 +44,12 @@ function InicioPage() {
             <p
               className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
             >
-              Total clients
+              Usuarios Creados
             </p>
             <p
               className="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-              6389
+              20
             </p>
           </div>
         </div>
@@ -67,12 +71,12 @@ function InicioPage() {
             <p
               className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
             >
-              Account balance
+              Reservas creadas
             </p>
             <p
               className="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-              $ 46,760.89
+              100
             </p>
           </div>
         </div>
@@ -92,12 +96,12 @@ function InicioPage() {
             <p
               className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
             >
-              New sales
+              Contratos creados
             </p>
             <p
               className="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-              376
+              60
             </p>
           </div>
         </div>
@@ -119,7 +123,7 @@ function InicioPage() {
             <p
               className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
             >
-              Pending contacts
+              Contactos Pendientes
             </p>
             <p
               className="text-lg font-semibold text-gray-700 dark:text-gray-200"
@@ -130,25 +134,12 @@ function InicioPage() {
         </div>
       </div>
 
-      <div className="w-full overflow-hidden rounded-lg shadow-xs mb-8">
-        <div className="w-full overflow-x-auto">
-          <table className="w-full whitespace-no-wrap">
-            <thead>
-              <tr
-                className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
-              >
-                <th className="px-4 py-3">Client</th>
-                <th className="px-4 py-3">Amount</th>
-                <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3">Date</th>
-              </tr>
-            </thead>
-            
-          </table>
-        </div>
-      </div>
+      
     </div>
+
   )
+
+
 }
 
 export default InicioPage

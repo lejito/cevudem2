@@ -81,7 +81,7 @@ function EventosClubPage() {
         Club del Egresado &gt; Eventos
       </h2>
       <div className="flex mb-4">
- <button class="inline-flex items-center mr-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
+        <button class="inline-flex items-center mr-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
           style={{
             backgroundColor: 'rgb(99 102 241)',
             color: 'white'

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Context } from './Context'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 import {
     requestBuscarUsuarios,
     requestBuscarUsuario,
@@ -33,6 +34,22 @@ export const ContextProvider = ({ children }) => {
         localStorage.clear()
         setSesion(null)
         navigate("/login")
+    }
+
+    const notif = (type, message, id) => {
+        switch (type) {
+            case "success":
+                toast.success(message, { toastId: id })
+                break;
+            case "warning":
+                toast.warning(message, { toastId: id })
+                break;
+            case "error":
+                toast.error(message, { toastId: id })
+                break;
+            default:
+                break;
+        }
     }
 
     const [usuarios, setUsuarios] = useState([])
@@ -119,6 +136,7 @@ export const ContextProvider = ({ children }) => {
 
     return (
         <Context.Provider value={{
+            notif,
             sesion,
             setSesion,
             logout,

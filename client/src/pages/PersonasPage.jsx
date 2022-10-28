@@ -10,13 +10,13 @@ function PersonasPage() {
       minWidth: 170
     },
     {
-      id: 'nombrecompleto',
-      label: 'Nombre completo',
+      id: 'nombre_completo',
+      label: 'Nombre Completo',
       minWidth: 100
     },
     {
-      id: 'correoelectronico',
-      label: 'Correo electrónico',
+      id: 'correo_electronico',
+      label: 'Correo Electrónico',
       minWidth: 170,
       align: 'right',
     },
@@ -32,16 +32,19 @@ function PersonasPage() {
       minWidth: 170,
       align: 'right',
     },
+
   ];
 
-  function createData(documento, nombrecompleto, correoelectronico, telefono, rol) {
-    return {documento, nombrecompleto, correoelectronico, telefono, rol};
+  function createData(documento, nombre_completo, correo_electronico, telefono, rol,) {
+    return { documento, nombre_completo, correo_electronico, telefono, rol, };
   }
 
   const rows = [
-    createData('India', 'IN', 1324171354, 3287263, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('China', 'CN', 1403500365, 9596961, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('Italy', 'IT', 60483973, 301340, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+    createData( 1324171354, 3287263, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
+   createData(13435153, 'andres perez','perezjuan@gmail.com', 3134567543, 'Administrador' ),
+   createData(44435153, 'juan perez','perezjuan@gmail.com', 313453453567543, 'Administrador' ),
+   createData(53454435153, 'camilo rodriguez','camrodriguez@gmail.com', 3134567533343, 'Administrador' )
+
   ];
 
   return (
