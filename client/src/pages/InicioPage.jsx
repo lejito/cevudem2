@@ -17,64 +17,7 @@ function InicioPage() {
     }
   }, [])
 
-  const columns = [
-    {
-      id: 'documento',
-      label: 'Documento',
-      minWidth: 170
-    },
-    {
-      id: 'nombre_completo',
-      label: 'Nombre Completo',
-      minWidth: 100
-    },
-    {
-      id: 'correo_electronico',
-      label: 'Correo Electrónico',
-      minWidth: 170,
-      align: 'right',
-    },
-    {
-      id: 'telefono',
-      label: 'Teléfono',
-      minWidth: 170,
-      align: 'right',
-    },
-    {
-      id: 'rol',
-      label: 'Rol',
-      minWidth: 170,
-      align: 'right',
-    },
-    {
-      id: 'opciones',
-      label: 'Opciones',
-      minWidth: 170,
-      align: 'right',
-    },
-  ];
 
-  function createData(documento, nombre_completo, correo_electronico, telefono, rol, opciones) {
-    return { documento, nombre_completo, correo_electronico, telefono, rol, opciones};
-  }
-
-  const rows = [
-    createData('India', 'IN', 1324171354, 3287263, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('China', 'CN', 1403500365, 9596961, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('Italy', 'IT', 60483973, 301340, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('United States', 'US', 327167434, 9833520, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('Canada', 'CA', 37602103, 9984670, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('Australia', 'AU', 25475400, 7692024, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('Germany', 'DE', 83019200, 357578, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('Ireland', 'IE', 4857000, 70273, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('Mexico', 'MX', 126577691, 1972550, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('Japan', 'JP', 126317000, 377973, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('France', 'FR', 67022000, 640679, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('United Kingdom', 'GB', 67545757, 242495, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('Russia', 'RU', 146793744, 17098246, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('Nigeria', 'NG', 200962417, 923768, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-    createData('Brazil', 'BR', 210147125, 8515767, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-  ];
 
   return (
     <div className="container px-6 mx-auto grid">
@@ -191,24 +134,7 @@ function InicioPage() {
         </div>
       </div>
 
-      <div className="flex mb-4">
-        <button class="inline-flex items-center mr-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
-          style={{
-            backgroundColor: 'rgb(99 102 241)',
-            color: 'white'
-          }}>
-          <FontAwesomeIcon icon={faUserPlus} class="h-5 w-5 mr-2" />
-          Crear Usuario
-        </button>
-      </div>
-
-      <div className="w-full overflow-hidden rounded-lg shadow-xs mb-8">
-
-        <div className="w-full overflow-x-auto">
-          <TableComponent columns={columns} rows={rows} />
-
-        </div>
-      </div>
+      
     </div>
 
   )

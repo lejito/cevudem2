@@ -32,11 +32,12 @@ function SolicitudesVivesPage() {
     },
   ];
 
-  function createData(codigo, responsable, fechainicio, fechafin, unidad, estado, acudiente, observaciones) {
-    return { codigo, responsable, fechainicio, fechafin, unidad, estado, acudiente, observaciones };
+  function createData(codigo, responsable, fechainicio, estado, acudiente) {
+    return { codigo, responsable, fechainicio, estado, acudiente };
   }
 
   const rows = [
+ 
     createData('India', 'IN', 1324171354, 3287263, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
     createData('China', 'CN', 1403500365, 9596961, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
     createData('Italy', 'IT', 60483973, 301340, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
@@ -59,10 +60,10 @@ function SolicitudesVivesPage() {
       <h2
         className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
       >
-        Club del Egresado &gt; Eventos
+        Vivienda Vives &gt; Solicitudes
       </h2>
       <div className="flex mb-4">
-      <button class="inline-flex items-center mr-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
+        <button class="inline-flex items-center mr-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
           style={{
             backgroundColor: 'rgb(99 102 241)',
             color: 'white'
