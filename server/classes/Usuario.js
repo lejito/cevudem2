@@ -15,6 +15,29 @@ export class Usuario {
         this.bloqueo = u.bloqueo ? u.bloqueo : 0
     }
 
+    static async buscarTodos() {
+        try {
+            const [result] = await pool.query(
+                "SELECT documento, tipo_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, correo_electronico, telefono, rol, bloqueo FROM usuarios"
+            )
+
+            if (result.length === 0) {
+                return false
+            }
+            else {
+                const usuarios = []
+                result.forEach(u => {
+                    usuarios.push(new Usuario(u))
+                })
+                return usuarios
+            }
+        }
+        catch (error) {
+            console.log(error)
+            return error
+        }
+    }
+
     async buscar() {
         try {
             const [result] = await pool.query(
@@ -107,7 +130,7 @@ export class Usuario {
         }
     }
 
-    async actualizarDatosDocumento(documento) {
+    async actualizarDocumento(documento) {
         try {
             const [result] = await pool.query(
                 "UPDATE usuarios SET documento = ?, tipo_documento = ? WHERE documento = ?",
@@ -131,7 +154,7 @@ export class Usuario {
         }
     }
 
-    async actualizarDatosPersonales(documento) {
+    async actualizarPersonales(documento) {
         try {
             const [result] = await pool.query(
                 "UPDATE usuarios SET primer_nombre = ?, segundo_nombre = ?, primer_apellido = ?, segundo_apellido = ?, correo_electronico = ?, telefono = ? WHERE documento = ?",
@@ -159,7 +182,7 @@ export class Usuario {
         }
     }
 
-    async actualizarDatosSeguridad(documento) {
+    async actualizarClave(documento) {
         try {
             const [result] = await pool.query(
                 "UPDATE usuarios SET clave = ? WHERE documento = ?",

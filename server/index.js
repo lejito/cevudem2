@@ -5,6 +5,7 @@ import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 
 import usuariosRoutes from './routes/usuarios.routes.js'
+import personasRoutes from './routes/personas.routes.js'
 
 const app = express()
 
@@ -17,6 +18,7 @@ app.use(cors({
 app.use(express.json())
 
 app.use(usuariosRoutes)
+app.use(personasRoutes)
 
 app.use(express.static(join(__dirname, '../client/dist')))
 

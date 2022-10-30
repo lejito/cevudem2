@@ -1,31 +1,24 @@
 import { Router } from 'express'
-import {
-    buscarUsuarios,
-    buscarUsuario,
-    insertarUsuario,
-    actualizarUsuario,
-    actualizarUsuarioDatosDocumento,
-    actualizarUsuarioDatosPersonales,
-    actualizarUsuarioDatosSeguridad,
-    verificarUsuario
-} from '../controllers/usuarios.controllers.js'
+import { Main } from '../classes/Main.js'
 
 const router = Router()
 
-router.get("/usuarios", buscarUsuarios)
+const main = new Main()
 
-router.get("/usuarios/:documento", buscarUsuario)
+router.get("/usuarios", main.buscarUsuarios)
 
-router.post("/usuarios", insertarUsuario)
+router.get("/usuarios/:documento", main.buscarUsuario)
 
-router.put("/usuarios/:documento", actualizarUsuario)
+router.post("/usuarios", main.insertarUsuario)
 
-router.put("/usuarios-doc/:documento", actualizarUsuarioDatosDocumento)
+router.put("/usuarios/:documento", main.actualizarUsuario)
 
-router.put("/usuarios-per/:documento", actualizarUsuarioDatosPersonales)
+router.put("/usuarios-doc/:documento", main.actualizarUsuarioDocumento)
 
-router.put("/usuarios-seg/:documento", actualizarUsuarioDatosSeguridad)
+router.put("/usuarios-per/:documento", main.actualizarUsuarioPersonales)
 
-router.post("/usuarios-ver", verificarUsuario)
+router.put("/usuarios-seg/:documento", main.actualizarUsuarioClave)
+
+router.post("/usuarios-ver", main.verificarUsuario)
 
 export default router

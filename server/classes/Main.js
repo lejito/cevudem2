@@ -1,31 +1,200 @@
-import { pool } from '../db.js'
 import { Usuario } from './Usuario.js'
+import { Persona } from './Persona.js'
 
 export class Main {
-    constructor() {
-        this.usuarios = []
+    //#region Usuarios
+    async buscarUsuarios(req, res) {
+        const respuesta = await Usuario.buscarTodos()
+
+        if (respuesta) {
+            res.json(respuesta)
+        }
+        else if (respuesta === false) {
+            res.json({ error: "Usuarios no encontrados" })
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
     }
 
-    async buscarUsuarios() {
-        try {
-            const [result] = await pool.query(
-                "SELECT documento, tipo_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, correo_electronico, telefono, rol, bloqueo FROM usuarios"
-            )
+    async buscarUsuario(req, res) {
+        const usuario = new Usuario(req.params)
+        const respuesta = await usuario.buscar()
 
-            if (result.length === 0) {
-                return false
+        if (respuesta === true) {
+            res.json(usuario)
+        }
+        else if (respuesta === false) {
+            res.json({ error: "Usuario no encontrado" })
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
+
+    async insertarUsuario(req, res) {
+        const usuario = new Usuario(req.body)
+        const respuesta = await usuario.insertar()
+
+        if (respuesta === true) {
+            res.json(usuario)
+        }
+        else if (respuesta === false) {
+            res.json({ error: "Usuario no insertado" })
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
+
+    async actualizarUsuario(req, res) {
+        const usuario = new Usuario(req.body)
+        const respuesta = await usuario.actualizar(req.params.documento)
+
+        if (respuesta === true) {
+            res.json(usuario)
+        }
+        else if (respuesta === false) {
+            res.json({ error: "Usuario no actualizado" })
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
+
+    async actualizarUsuarioDocumento(req, res) {
+        const usuario = new Usuario(req.body)
+        const respuesta = await usuario.actualizarDocumento(req.params.documento)
+
+        if (respuesta === true) {
+            res.json(usuario)
+        }
+        else if (respuesta === false) {
+            res.json({ error: "Usuario no actualizado (datos documento)" })
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
+
+    async actualizarUsuarioPersonales(req, res) {
+        const usuario = new Usuario(req.body)
+        const respuesta = await usuario.actualizarPersonales(req.params.documento)
+
+        if (respuesta === true) {
+            res.json(usuario)
+        }
+        else if (respuesta === false) {
+            res.json({ error: "Usuario no actualizado (datos personales)" })
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
+
+    async actualizarUsuarioClave(req, res) {
+        const usuario = new Usuario(req.body)
+        const respuesta = await usuario.actualizarClave(req.params.documento)
+
+        if (respuesta === true) {
+            res.json(usuario)
+        }
+        else if (respuesta === false) {
+            res.json({ error: "Usuario no actualizado (datos seguridad)" })
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
+
+    async verificarUsuario(req, res) {
+        try {
+            const usuario = new Usuario(req.body)
+            const respuesta = await usuario.verificar()
+
+            if (respuesta.length === 3) {
+                res.json(respuesta)
             }
             else {
-                this.usuarios = []
-                result.forEach(u => {
-                    this.usuarios.push(new Usuario(u))
-                })
-                return true
+                res.json({ error: respuesta.message })
             }
         }
         catch (error) {
-            console.log(error)
-            return error
+            res.json({ error: error.message })
         }
     }
+    //#endregion
+
+    //#region Personas
+    async buscarPersonas(req, res) {
+        const respuesta = await Persona.buscarTodas()
+
+        if (respuesta) {
+            res.json(respuesta)
+        }
+        else if (respuesta === false) {
+            res.json({ error: "Personas no encontradas" })
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
+
+    async buscarPersona(req, res) {
+        const persona = new Persona(req.params)
+        const respuesta = await persona.buscar()
+
+        if (respuesta === true) {
+            res.json(persona)
+        }
+        else if (respuesta === false) {
+            res.json({ error: "Persona no encontrada" })
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
+
+    async insertarPersona(req, res) {
+        const persona = new Persona(req.body)
+        const respuesta = await persona.insertar()
+
+        if (respuesta === true) {
+            res.json(persona)
+        }
+        else if (respuesta === false) {
+            res.json({ error: "Persona no insertada" })
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
+
+    async actualizarPersona(req, res) {
+        const persona = new Persona(req.body)
+        const respuesta = await persona.actualizar(req.params.documento)
+
+        if (respuesta === true) {
+            res.json(persona)
+        }
+        else if (respuesta === false) {
+            res.json({ error: "Persona no actualizada" })
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
+    //#endregion
+
+    //#region Reservas
+    //#endregion
+
+    //#region Eventos
+    //#endregion
+
+    //#region Solicitudes
+    //#endregion
+
+    //#region Contratos
+    //#endregion
 }
