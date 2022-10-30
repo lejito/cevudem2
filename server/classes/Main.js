@@ -1,5 +1,9 @@
 import { Usuario } from './Usuario.js'
 import { Persona } from './Persona.js'
+import { Reserva } from './Reserva.js'
+import { Evento } from './Evento.js'
+import { Solicitud } from './Solicitud.js'
+import { Contrato } from './Contrato.js'
 
 export class Main {
     //#region Usuarios
@@ -187,14 +191,54 @@ export class Main {
     //#endregion
 
     //#region Reservas
+    async contarReservas(req, res) {
+        const respuesta = await Reserva.contarTodas()
+
+        if (!respuesta.error) {
+            res.json(respuesta)
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
     //#endregion
 
     //#region Eventos
+    async contarEventos(req, res) {
+        const respuesta = await Evento.contarTodos()
+
+        if (!respuesta.error) {
+            res.json(respuesta)
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
     //#endregion
 
     //#region Solicitudes
+    async contarSolicitudes(req, res) {
+        const respuesta = await Solicitud.contarTodas()
+
+        if (!respuesta.error) {
+            res.json(respuesta)
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
     //#endregion
 
     //#region Contratos
+    async contarContratos(req, res) {
+        const respuesta = await Contrato.contarTodos()
+
+        if (!respuesta.error) {
+            res.json(respuesta)
+        }
+        else {
+            res.json({ error: respuesta.message })
+        }
+    }
     //#endregion
 }

@@ -1,6 +1,5 @@
 import axios from 'axios'
-
-const ROUTE = "http://localhost:3000" // Enlace/Ruta del backend
+import { ROUTE } from './config.api'
 
 export const requestBuscarUsuarios = async () => {
     return await axios.get(`${ROUTE}/usuarios`)

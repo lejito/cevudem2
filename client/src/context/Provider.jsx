@@ -12,6 +12,10 @@ import {
     requestActualizarUsuarioDatosSeguridad,
     requestVerificarUsuario,
 } from '../api/usuarios.api'
+import { requestContarReservas } from '../api/reservas.api'
+import { requestContarEventos } from '../api/eventos.api'
+import { requestContarSolicitudes } from '../api/solicitudes.api'
+import { requestContarContratos } from '../api/contratos.api'
 
 export const useAppContext = () => {
     const context = useContext(Context)
@@ -25,10 +29,10 @@ export const useAppContext = () => {
 }
 
 export const ContextProvider = ({ children }) => {
+    const navigate = useNavigate()
+
     const loggedUserJSON = localStorage.getItem('loggedAppUser')
     const [sesion, setSesion] = useState(JSON.parse(loggedUserJSON))
-
-    const navigate = useNavigate()
 
     const logout = () => {
         localStorage.clear()
@@ -52,12 +56,13 @@ export const ContextProvider = ({ children }) => {
         }
     }
 
+    //#region Usuarios
     const [usuarios, setUsuarios] = useState([])
 
     async function buscarUsuarios() {
         try {
             const response = await requestBuscarUsuarios()
-            return response.data
+            setUsuarios(response.data)
         }
         catch (error) {
             console.log(error)
@@ -133,21 +138,72 @@ export const ContextProvider = ({ children }) => {
             console.log(error)
         }
     }
+    //#endregion
+
+    //#region Reservas
+    const [numReservas, setNumReservas] = useState("...")
+
+    const contarReservas = async () => {
+        try {
+            const response = await requestContarReservas()
+            setNumReservas(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    //#endregion
+
+    //#region Eventos
+    const [numEventos, setNumEventos] = useState("...")
+
+    const contarEventos = async () => {
+        try {
+            const response = await requestContarEventos()
+            setNumEventos(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    //#endregion
+
+    //#region Solicitudes
+    const [numSolicitudes, setNumSolicitudes] = useState("...")
+
+    const contarSolicitudes = async () => {
+        try {
+            const response = await requestContarSolicitudes()
+            setNumSolicitudes(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    //#endregion
+
+    //#region Contratos
+    const [numContratos, setNumContratos] = useState("...")
+
+    const contarContratos = async () => {
+        try {
+            const response = await requestContarContratos()
+            setNumContratos(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    //#endregion
 
     return (
         <Context.Provider value={{
-            notif,
-            sesion,
-            setSesion,
-            logout,
-            usuarios,
-            buscarUsuarios,
-            buscarUsuario,
-            actualizarUsuario,
-            actualizarUsuarioDocumento,
-            actualizarUsuarioPersonales,
-            actualizarUsuarioSeguridad,
-            verificarUsuario
+            notif, sesion, setSesion, logout,
+            usuarios, buscarUsuarios, buscarUsuario, actualizarUsuario, actualizarUsuarioDocumento, actualizarUsuarioPersonales, actualizarUsuarioSeguridad, verificarUsuario,
+            numReservas, contarReservas,
+            numEventos, contarEventos,
+            numSolicitudes, contarSolicitudes,
+            numContratos, contarContratos
         }}>
             {children}
         </Context.Provider>

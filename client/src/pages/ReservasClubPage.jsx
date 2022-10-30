@@ -83,7 +83,7 @@ function ReservasClubPage() {
       <h2
         className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
       >
-        Club del Egresado &gt; Reservas
+        Casa Club del Egresado &gt; Reservas
       </h2>
       <div className="flex mb-4">
         <button class="inline-flex items-center mr-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"

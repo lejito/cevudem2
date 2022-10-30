@@ -675,7 +675,13 @@ print and (-ms-high-contrast:none) {
 .bg-orange {
     --bg-opacity: 1;
     background-color: orange;
-    background-color: rgba(254, 236, 220, var(--bg-opacity))
+    background-color: rgba(255, 165, 0, var(--bg-opacity))
+}
+
+.bg-orange-100 {
+    --bg-opacity: 1;
+    background-color: #ffefd1;
+    background-color: rgba(255, 239, 209, var(--bg-opacity))
 }
 
 .bg-green-100 {
@@ -732,6 +738,12 @@ print and (-ms-high-contrast:none) {
     background-color: rgba(201, 37, 52, var(--bg-opacity))
 }
 
+.bg-secondary {
+    --bg-opacity: 1;
+    background-color: #7a7a7a;
+    background-color: rgba(122, 122, 122, var(--bg-opacity))
+}
+
 .hover\:bg-gray-100:hover {
     --bg-opacity: 1;
     background-color: #f4f5f7;
@@ -742,6 +754,12 @@ print and (-ms-high-contrast:none) {
     --bg-opacity: 1;
     background-color: #6c2bd9;
     background-color: rgba(108, 43, 217, var(--bg-opacity))
+}
+
+.hover\:bg-orange:hover {
+    --bg-opacity: 1;
+    background-color: #ffc353;
+    background-color: rgba(255, 195, 83, var(--bg-opacity))
 }
 
 .hover\:bg-primary:hover {

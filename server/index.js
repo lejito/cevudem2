@@ -6,6 +6,12 @@ import { fileURLToPath } from 'url'
 
 import usuariosRoutes from './routes/usuarios.routes.js'
 import personasRoutes from './routes/personas.routes.js'
+import reservasRoutes from './routes/reservas.routes.js'
+import eventosRoutes from './routes/eventos.routes.js'
+import solicitudesRoutes from './routes/solicitudes.routes.js'
+import contratosRoutes from './routes/contratos.routes.js'
+
+
 
 const app = express()
 
@@ -19,6 +25,10 @@ app.use(express.json())
 
 app.use(usuariosRoutes)
 app.use(personasRoutes)
+app.use(reservasRoutes)
+app.use(eventosRoutes)
+app.use(solicitudesRoutes)
+app.use(contratosRoutes)
 
 app.use(express.static(join(__dirname, '../client/dist')))
 

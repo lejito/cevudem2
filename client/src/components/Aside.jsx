@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faUsers, faCalendarAlt, faReceipt, faClipboardList, faBuilding } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faUsers, faReceipt, faCalendarAlt, faClipboardList, faBuilding } from '@fortawesome/free-solid-svg-icons'
 
 function Aside() {
     return (
