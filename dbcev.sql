@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: bds0lfzrt93yrf5j5lfx-mysql.services.clever-cloud.com:3306
--- Generation Time: Oct 30, 2022 at 06:21 PM
--- Server version: 8.0.22-13
--- PHP Version: 7.2.34
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 31-10-2022 a las 03:59:13
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,23 +18,25 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dbcev`
+-- Base de datos: `dbcev`
 --
+CREATE DATABASE IF NOT EXISTS `dbcev` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `dbcev`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `apartamentos`
+-- Estructura de tabla para la tabla `apartamentos`
 --
 
 CREATE TABLE `apartamentos` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `tipo` enum('estandar','balcon','terraza') NOT NULL,
-  `habilitado` tinyint(1) NOT NULL DEFAULT '1'
+  `habilitado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `apartamentos`
+-- Volcado de datos para la tabla `apartamentos`
 --
 
 INSERT INTO `apartamentos` (`id`, `tipo`, `habilitado`) VALUES
@@ -98,22 +99,22 @@ INSERT INTO `apartamentos` (`id`, `tipo`, `habilitado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contratos`
+-- Estructura de tabla para la tabla `contratos`
 --
 
 CREATE TABLE `contratos` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `estudiante` varchar(15) NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date NOT NULL,
-  `apartamento` int NOT NULL,
+  `apartamento` int(11) NOT NULL,
   `estado` enum('activo','finalizado') NOT NULL,
   `observaciones` varchar(300) DEFAULT NULL,
   `responsable` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `contratos`
+-- Volcado de datos para la tabla `contratos`
 --
 
 INSERT INTO `contratos` (`id`, `estudiante`, `fecha_inicio`, `fecha_fin`, `apartamento`, `estado`, `observaciones`, `responsable`) VALUES
@@ -122,21 +123,21 @@ INSERT INTO `contratos` (`id`, `estudiante`, `fecha_inicio`, `fecha_fin`, `apart
 -- --------------------------------------------------------
 
 --
--- Table structure for table `eventos`
+-- Estructura de tabla para la tabla `eventos`
 --
 
 CREATE TABLE `eventos` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `socio` varchar(15) NOT NULL,
   `fecha_hora_inicio` datetime NOT NULL,
   `fecha_hora_fin` datetime NOT NULL,
-  `lugar` int NOT NULL,
-  `numero_asistentes` int NOT NULL,
+  `lugar` int(11) NOT NULL,
+  `numero_asistentes` int(11) NOT NULL,
   `estado` enum('pendiente','activo','finalizado','cancelado') NOT NULL DEFAULT 'pendiente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `eventos`
+-- Volcado de datos para la tabla `eventos`
 --
 
 INSERT INTO `eventos` (`id`, `socio`, `fecha_hora_inicio`, `fecha_hora_fin`, `lugar`, `numero_asistentes`, `estado`) VALUES
@@ -147,17 +148,17 @@ INSERT INTO `eventos` (`id`, `socio`, `fecha_hora_inicio`, `fecha_hora_fin`, `lu
 -- --------------------------------------------------------
 
 --
--- Table structure for table `habitaciones`
+-- Estructura de tabla para la tabla `habitaciones`
 --
 
 CREATE TABLE `habitaciones` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `capacidad` enum('1','2','3','4') NOT NULL,
-  `habilitada` tinyint(1) NOT NULL DEFAULT '1'
+  `habilitada` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `habitaciones`
+-- Volcado de datos para la tabla `habitaciones`
 --
 
 INSERT INTO `habitaciones` (`id`, `capacidad`, `habilitada`) VALUES
@@ -172,18 +173,18 @@ INSERT INTO `habitaciones` (`id`, `capacidad`, `habilitada`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lugares`
+-- Estructura de tabla para la tabla `lugares`
 --
 
 CREATE TABLE `lugares` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
-  `capacidad` int NOT NULL,
-  `habilitado` tinyint(1) NOT NULL DEFAULT '1'
+  `capacidad` int(11) NOT NULL,
+  `habilitado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `lugares`
+-- Volcado de datos para la tabla `lugares`
 --
 
 INSERT INTO `lugares` (`id`, `nombre`, `capacidad`, `habilitado`) VALUES
@@ -199,7 +200,7 @@ INSERT INTO `lugares` (`id`, `nombre`, `capacidad`, `habilitado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personas`
+-- Estructura de tabla para la tabla `personas`
 --
 
 CREATE TABLE `personas` (
@@ -215,7 +216,7 @@ CREATE TABLE `personas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `personas`
+-- Volcado de datos para la tabla `personas`
 --
 
 INSERT INTO `personas` (`documento`, `tipo_documento`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `correo_electronico`, `telefono`, `rol`) VALUES
@@ -231,21 +232,21 @@ INSERT INTO `personas` (`documento`, `tipo_documento`, `primer_nombre`, `segundo
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reservas`
+-- Estructura de tabla para la tabla `reservas`
 --
 
 CREATE TABLE `reservas` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `socio` varchar(15) NOT NULL,
   `fecha_hora_inicio` datetime NOT NULL,
   `fecha_hora_fin` datetime NOT NULL,
-  `habitacion` int NOT NULL,
+  `habitacion` int(11) NOT NULL,
   `numero_agregados` enum('0','1','2','3') NOT NULL DEFAULT '0',
   `estado` enum('pendiente','activa','finalizada','cancelada') NOT NULL DEFAULT 'pendiente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `reservas`
+-- Volcado de datos para la tabla `reservas`
 --
 
 INSERT INTO `reservas` (`id`, `socio`, `fecha_hora_inicio`, `fecha_hora_fin`, `habitacion`, `numero_agregados`, `estado`) VALUES
@@ -255,11 +256,11 @@ INSERT INTO `reservas` (`id`, `socio`, `fecha_hora_inicio`, `fecha_hora_fin`, `h
 -- --------------------------------------------------------
 
 --
--- Table structure for table `solicitudes`
+-- Estructura de tabla para la tabla `solicitudes`
 --
 
 CREATE TABLE `solicitudes` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `estudiante` varchar(15) NOT NULL,
   `fecha_hora_entrevista` datetime NOT NULL,
   `estado` enum('pendiente','aprobada','cancelada') NOT NULL DEFAULT 'pendiente',
@@ -267,7 +268,7 @@ CREATE TABLE `solicitudes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `solicitudes`
+-- Volcado de datos para la tabla `solicitudes`
 --
 
 INSERT INTO `solicitudes` (`id`, `estudiante`, `fecha_hora_entrevista`, `estado`, `responsable`) VALUES
@@ -279,11 +280,11 @@ INSERT INTO `solicitudes` (`id`, `estudiante`, `fecha_hora_entrevista`, `estado`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `suscripciones`
+-- Estructura de tabla para la tabla `suscripciones`
 --
 
 CREATE TABLE `suscripciones` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `socio` varchar(15) NOT NULL,
   `fecha_inicio` date NOT NULL,
   `dia` enum('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28') NOT NULL,
@@ -294,7 +295,7 @@ CREATE TABLE `suscripciones` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -308,11 +309,11 @@ CREATE TABLE `usuarios` (
   `telefono` varchar(30) DEFAULT NULL,
   `rol` enum('administrador','ayudante') NOT NULL,
   `clave` varchar(255) DEFAULT NULL,
-  `bloqueo` tinyint(1) NOT NULL DEFAULT '0'
+  `bloqueo` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `usuarios`
+-- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`documento`, `tipo_documento`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `correo_electronico`, `telefono`, `rol`, `clave`, `bloqueo`) VALUES
@@ -324,17 +325,17 @@ INSERT INTO `usuarios` (`documento`, `tipo_documento`, `primer_nombre`, `segundo
 ('987654321', 'ce', 'Marcelo', 'Andrés', 'Guerra', NULL, 'maguerra@gmail.com', '000', 'administrador', '123x', 0);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `apartamentos`
+-- Indices de la tabla `apartamentos`
 --
 ALTER TABLE `apartamentos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `contratos`
+-- Indices de la tabla `contratos`
 --
 ALTER TABLE `contratos`
   ADD PRIMARY KEY (`id`),
@@ -343,7 +344,7 @@ ALTER TABLE `contratos`
   ADD KEY `responsable` (`responsable`);
 
 --
--- Indexes for table `eventos`
+-- Indices de la tabla `eventos`
 --
 ALTER TABLE `eventos`
   ADD PRIMARY KEY (`id`),
@@ -351,26 +352,26 @@ ALTER TABLE `eventos`
   ADD KEY `habitacion` (`lugar`);
 
 --
--- Indexes for table `habitaciones`
+-- Indices de la tabla `habitaciones`
 --
 ALTER TABLE `habitaciones`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `lugares`
+-- Indices de la tabla `lugares`
 --
 ALTER TABLE `lugares`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `personas`
+-- Indices de la tabla `personas`
 --
 ALTER TABLE `personas`
   ADD PRIMARY KEY (`documento`),
   ADD UNIQUE KEY `correo_electronico` (`correo_electronico`);
 
 --
--- Indexes for table `reservas`
+-- Indices de la tabla `reservas`
 --
 ALTER TABLE `reservas`
   ADD PRIMARY KEY (`id`),
@@ -378,7 +379,7 @@ ALTER TABLE `reservas`
   ADD KEY `habitacion` (`habitacion`);
 
 --
--- Indexes for table `solicitudes`
+-- Indices de la tabla `solicitudes`
 --
 ALTER TABLE `solicitudes`
   ADD PRIMARY KEY (`id`),
@@ -386,71 +387,71 @@ ALTER TABLE `solicitudes`
   ADD KEY `responsable` (`responsable`);
 
 --
--- Indexes for table `suscripciones`
+-- Indices de la tabla `suscripciones`
 --
 ALTER TABLE `suscripciones`
   ADD PRIMARY KEY (`id`),
   ADD KEY `persona` (`socio`);
 
 --
--- Indexes for table `usuarios`
+-- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`documento`),
   ADD UNIQUE KEY `correo_electronico` (`correo_electronico`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `apartamentos`
+-- AUTO_INCREMENT de la tabla `apartamentos`
 --
 ALTER TABLE `apartamentos`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1103;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1103;
 
 --
--- AUTO_INCREMENT for table `contratos`
+-- AUTO_INCREMENT de la tabla `contratos`
 --
 ALTER TABLE `contratos`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `eventos`
+-- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `lugares`
+-- AUTO_INCREMENT de la tabla `lugares`
 --
 ALTER TABLE `lugares`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `reservas`
+-- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `solicitudes`
+-- AUTO_INCREMENT de la tabla `solicitudes`
 --
 ALTER TABLE `solicitudes`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `suscripciones`
+-- AUTO_INCREMENT de la tabla `suscripciones`
 --
 ALTER TABLE `suscripciones`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `contratos`
+-- Filtros para la tabla `contratos`
 --
 ALTER TABLE `contratos`
   ADD CONSTRAINT `contratos_ibfk_1` FOREIGN KEY (`estudiante`) REFERENCES `personas` (`documento`) ON UPDATE CASCADE,
@@ -458,28 +459,28 @@ ALTER TABLE `contratos`
   ADD CONSTRAINT `contratos_ibfk_3` FOREIGN KEY (`apartamento`) REFERENCES `apartamentos` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `eventos`
+-- Filtros para la tabla `eventos`
 --
 ALTER TABLE `eventos`
   ADD CONSTRAINT `eventos_ibfk_1` FOREIGN KEY (`socio`) REFERENCES `personas` (`documento`) ON UPDATE CASCADE,
   ADD CONSTRAINT `eventos_ibfk_2` FOREIGN KEY (`lugar`) REFERENCES `lugares` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `reservas`
+-- Filtros para la tabla `reservas`
 --
 ALTER TABLE `reservas`
   ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`socio`) REFERENCES `personas` (`documento`) ON UPDATE CASCADE,
   ADD CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`habitacion`) REFERENCES `habitaciones` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `solicitudes`
+-- Filtros para la tabla `solicitudes`
 --
 ALTER TABLE `solicitudes`
   ADD CONSTRAINT `solicitudes_ibfk_1` FOREIGN KEY (`estudiante`) REFERENCES `personas` (`documento`) ON UPDATE CASCADE,
   ADD CONSTRAINT `solicitudes_ibfk_2` FOREIGN KEY (`responsable`) REFERENCES `personas` (`documento`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `suscripciones`
+-- Filtros para la tabla `suscripciones`
 --
 ALTER TABLE `suscripciones`
   ADD CONSTRAINT `suscripciones_ibfk_1` FOREIGN KEY (`socio`) REFERENCES `personas` (`documento`) ON UPDATE CASCADE;
