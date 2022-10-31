@@ -12,14 +12,14 @@ function FormUsuario() {
 
     const [usuario, setUsuario] = useState({
         documento: "",
-        tipo_documento: "",
+        tipo_documento: "cc",
         primer_nombre: "",
         segundo_nombre: "",
         primer_apellido: "",
         segundo_apellido: "",
         correo_electronico: "",
         telefono: "",
-        rol: ""
+        rol: "administrador"
     })
 
     useEffect(() => {
@@ -67,6 +67,7 @@ function FormUsuario() {
                     }
                     else {
                         const respuesta = await insertarUsuario(values)
+                        console.log(values)
 
                         if (respuesta.error) {
                             notif("error", "Hubo un error al intentar añadir el usuario", 4003)
@@ -78,14 +79,14 @@ function FormUsuario() {
 
                     setUsuario({
                         documento: "",
-                        tipo_documento: "",
+                        tipo_documento: "cc",
                         primer_nombre: "",
                         segundo_nombre: "",
                         primer_apellido: "",
                         segundo_apellido: "",
                         correo_electronico: "",
                         telefono: "",
-                        rol: ""
+                        rol: "administrador"
                     })
 
                     navigate("/")
