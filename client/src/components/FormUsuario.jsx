@@ -67,7 +67,6 @@ function FormUsuario() {
                     }
                     else {
                         const respuesta = await insertarUsuario(values)
-                        console.log(values)
 
                         if (respuesta.error) {
                             notif("error", "Hubo un error al intentar añadir el usuario", 4003)
