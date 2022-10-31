@@ -1,4 +1,4 @@
-import { pool } from '../db.js'
+import { Pool } from '../db.js'
 
 export class Persona {
     constructor(p) {

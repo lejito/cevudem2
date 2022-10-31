@@ -66,17 +66,16 @@ function FormLogin() {
                         }
                     }
                 }
-
             }}
         >
             {({ handleChange, handleSubmit, values, isSubmitting }) => (
                 <Form onSubmit={handleSubmit}>
-                    <label class="block text-sm">
-                        <span class="text-dark">
+                    <label className="block text-sm">
+                        <span className="text-dark">
                             Tipo de documento
                         </span>
                         <select
-                            class="block w-full mt-1 text-sm form-select focus:border-primary focus:outline-none focus:shadow-outline-primary"
+                            className="block w-full mt-1 text-sm form-select focus:border-primary focus:outline-none focus:shadow-outline-primary"
                             name="tipo_documento"
                             required
                             onChange={handleChange}
@@ -123,7 +122,7 @@ function FormLogin() {
                             </a>
                         </p>
                         <button
-                            className="block disabled w-56 font-bold px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-primary border border-transparent rounded-full active:bg-primary hover:bg-primary focus:outline-none focus:shadow-outline-purple"
+                            className="block w-56 font-bold px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-primary border border-transparent rounded-full active:bg-primary hover:bg-primary focus:outline-none focus:shadow-outline-purple"
                             type="submit"
                             disabled={isSubmitting}
                         >

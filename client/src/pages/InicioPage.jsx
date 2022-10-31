@@ -9,7 +9,7 @@ function InicioPage() {
 
   const {
     sesion,
-    usuarios, buscarUsuarios,
+    usuarios, buscarUsuario, buscarUsuarios,
     numReservas, contarReservas,
     numEventos, contarEventos,
     numSolicitudes, contarSolicitudes,
@@ -27,7 +27,7 @@ function InicioPage() {
 
   useEffect(() => {
     if (!sesion) {
-      navigate("/login")
+      navigate("/")
     }
 
     cargarEstadisticas()
@@ -157,8 +157,6 @@ function InicioPage() {
       </div>
     </div>
   )
-
-
 }
 
 export default InicioPage

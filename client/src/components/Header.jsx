@@ -68,7 +68,7 @@ function Header() {
                                 </span>
                             </Dropdown.Header>
                             <hr />
-                            <Dropdown.Item>
+                            <Dropdown.Item onClick={() => {navigate("/dashboard/ajustes")}}>
                                 Ajustes
                             </Dropdown.Item>
                             <Dropdown.Divider />

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Context } from './Context'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
@@ -11,6 +11,9 @@ import {
     requestActualizarUsuarioDatosPersonales,
     requestActualizarUsuarioDatosSeguridad,
     requestVerificarUsuario,
+    requestVerificarUsuarioDocumento,
+    requestVerificarUsuarioCorreo,
+    requestVerificarUsuarioClave
 } from '../api/usuarios.api'
 import { requestContarReservas } from '../api/reservas.api'
 import { requestContarEventos } from '../api/eventos.api'
@@ -31,13 +34,30 @@ export const useAppContext = () => {
 export const ContextProvider = ({ children }) => {
     const navigate = useNavigate()
 
-    const loggedUserJSON = localStorage.getItem('loggedAppUser')
-    const [sesion, setSesion] = useState(JSON.parse(loggedUserJSON))
+    const [sesion, setSesion] = useState(JSON.parse(localStorage.getItem('loggedAppUser')))
+
+    async function actualizarDatosSesion() {
+        try {
+            const datosSesion = await buscarUsuario(sesion.documento)
+            localStorage.setItem(
+                'loggedAppUser', JSON.stringify(datosSesion)
+            )
+            setSesion(datosSesion)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+      actualizarDatosSesion()
+    }, [])
+    
 
     const logout = () => {
         localStorage.clear()
         setSesion(null)
-        navigate("/login")
+        navigate("/")
     }
 
     const notif = (type, message, id) => {
@@ -138,6 +158,36 @@ export const ContextProvider = ({ children }) => {
             console.log(error)
         }
     }
+
+    const verificarUsuarioDocumento = async (documento) => {
+        try {
+            const response = await requestVerificarUsuarioDocumento(documento)
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    const verificarUsuarioCorreo = async (datos) => {
+        try {
+            const response = await requestVerificarUsuarioCorreo(datos)
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    const verificarUsuarioClave = async (datos) => {
+        try {
+            const response = await requestVerificarUsuarioClave(datos)
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
     //#endregion
 
     //#region Reservas
@@ -198,8 +248,8 @@ export const ContextProvider = ({ children }) => {
 
     return (
         <Context.Provider value={{
-            notif, sesion, setSesion, logout,
-            usuarios, buscarUsuarios, buscarUsuario, actualizarUsuario, actualizarUsuarioDocumento, actualizarUsuarioPersonales, actualizarUsuarioSeguridad, verificarUsuario,
+            notif, sesion, setSesion, logout, actualizarDatosSesion,
+            usuarios, buscarUsuarios, buscarUsuario, actualizarUsuario, actualizarUsuarioDocumento, actualizarUsuarioPersonales, actualizarUsuarioSeguridad, verificarUsuario, verificarUsuarioDocumento, verificarUsuarioCorreo, verificarUsuarioClave,
             numReservas, contarReservas,
             numEventos, contarEventos,
             numSolicitudes, contarSolicitudes,

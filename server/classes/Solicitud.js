@@ -1,4 +1,4 @@
-import { pool } from '../db.js'
+import { Pool } from '../db.js'
 
 export class Solicitud {
     constructor(s) {
@@ -11,7 +11,7 @@ export class Solicitud {
 
     static async contarTodas() {
         try {
-            const [result] = await pool.query(
+            const [result] = await Pool.query(
                 "SELECT COUNT(*) as num FROM solicitudes"
             )
 

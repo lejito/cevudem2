@@ -1,4 +1,4 @@
-import { pool } from '../db.js'
+import { Pool } from '../db.js'
 
 export class Usuario {
     constructor(u) {
@@ -17,8 +17,8 @@ export class Usuario {
 
     static async buscarTodos() {
         try {
-            const [result] = await pool.query(
-                "SELECT documento, tipo_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, correo_electronico, telefono, rol, bloqueo FROM usuarios"
+            const [result] = await Pool.query(
+                "SELECT documento, tipo_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, correo_electronico, telefono, rol, bloqueo FROM usuarios ORDER BY bloqueo ASC"
             )
 
             if (result.length === 0) {
@@ -40,9 +40,11 @@ export class Usuario {
 
     async buscar() {
         try {
-            const [result] = await pool.query(
+            const [result] = await Pool.query(
                 "SELECT documento, tipo_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, correo_electronico, telefono, rol, bloqueo FROM usuarios WHERE documento = ?",
-                this.documento
+                [
+                    this.documento
+                ]
             )
 
             if (result.length === 0) {
@@ -70,7 +72,7 @@ export class Usuario {
 
     async insertar() {
         try {
-            const [result] = await pool.query(
+            const [result] = await Pool.query(
                 "INSERT INTO usuarios(documento, tipo_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, correo_electronico, telefono, rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 [
                     this.documento,
@@ -100,7 +102,7 @@ export class Usuario {
 
     async actualizar(documento) {
         try {
-            const [result] = await pool.query(
+            const [result] = await Pool.query(
                 "UPDATE usuarios SET documento = ?, tipo_documento = ?, primer_nombre = ?, segundo_nombre = ?, primer_apellido = ?, segundo_apellido = ?, correo_electronico = ?, telefono = ?, rol = ?, bloqueo = ? WHERE documento = ?",
                 [
                     this.documento,
@@ -132,13 +134,14 @@ export class Usuario {
 
     async actualizarDocumento(documento) {
         try {
-            const [result] = await pool.query(
+            const [result] = await Pool.query(
                 "UPDATE usuarios SET documento = ?, tipo_documento = ? WHERE documento = ?",
                 [
                     this.documento,
                     this.tipo_documento,
                     documento
                 ]
+
             )
 
             if (result.affectedRows === 0) {
@@ -156,7 +159,7 @@ export class Usuario {
 
     async actualizarPersonales(documento) {
         try {
-            const [result] = await pool.query(
+            const [result] = await Pool.query(
                 "UPDATE usuarios SET primer_nombre = ?, segundo_nombre = ?, primer_apellido = ?, segundo_apellido = ?, correo_electronico = ?, telefono = ? WHERE documento = ?",
                 [
                     this.primer_nombre,
@@ -184,7 +187,7 @@ export class Usuario {
 
     async actualizarClave(documento) {
         try {
-            const [result] = await pool.query(
+            const [result] = await Pool.query(
                 "UPDATE usuarios SET clave = ? WHERE documento = ?",
                 [
                     this.clave,
@@ -205,17 +208,61 @@ export class Usuario {
         }
     }
 
-    async verificar() {
+    async verificarNumeroDocumento() {
         try {
-            const [result1] = await pool.query(
-                "SELECT COUNT(*) as num FROM usuarios WHERE documento = ? AND tipo_documento = ?",
+            const [result] = await Pool.query(
+                "SELECT COUNT(*) as num FROM usuarios WHERE documento = ?",
                 [
-                    this.documento,
-                    this.tipo_documento,
+                    this.documento
                 ]
             )
 
-            const [result2] = await pool.query(
+            return result[0].num === 1
+        }
+        catch (error) {
+            console.log(error)
+            return error
+        }
+    }
+
+    async verificarCorreoElectronico() {
+        try {
+            const [result] = await Pool.query(
+                "SELECT COUNT(*) as num FROM usuarios WHERE correo_electronico = ?",
+                [
+                    this.correo_electronico
+                ]
+            )
+
+            return result[0].num === 1
+        }
+        catch (error) {
+            console.log(error)
+            return error
+        }
+    }
+
+    async verificarDocumento() {
+        try {
+            const [result] = await Pool.query(
+                "SELECT COUNT(*) as num FROM usuarios WHERE documento = ? AND tipo_documento = ?",
+                [
+                    this.documento,
+                    this.tipo_documento
+                ]
+            )
+
+            return result[0].num === 1
+        }
+        catch (error) {
+            console.log(error)
+            return error
+        }
+    }
+
+    async verificarClave() {
+        try {
+            const [result] = await Pool.query(
                 "SELECT COUNT(*) as num FROM usuarios WHERE documento = ? AND clave= ?",
                 [
                     this.documento,
@@ -223,16 +270,36 @@ export class Usuario {
                 ]
             )
 
-            const [result3] = await pool.query(
+            return result[0].num === 1
+        }
+        catch (error) {
+            console.log(error)
+            return error
+        }
+    }
+
+    async verificarBloqueo() {
+        try {
+            const [result] = await Pool.query(
                 "SELECT bloqueo FROM usuarios WHERE documento = ?",
                 [
-                    this.documento,
+                    this.documento
                 ]
             )
 
-            const verifDocumento = result1[0].num === 1
-            const verifClave = result2[0].num === 1
-            const verifBloqueo = result3[0] ? result3[0].bloqueo == 0 : false
+            return result[0] ? result[0].bloqueo == 0 : false
+        }
+        catch (error) {
+            console.log(error)
+            return error
+        }
+    }
+
+    async verificar() {
+        try {
+            const verifDocumento = await this.verificarDocumento()
+            const verifClave = await this.verificarClave()
+            const verifBloqueo = await this.verificarBloqueo()
             return [verifDocumento, verifClave, verifBloqueo]
         }
         catch (error) {

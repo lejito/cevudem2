@@ -19,6 +19,12 @@ router.put("/usuarios-per/:documento", main.actualizarUsuarioPersonales)
 
 router.put("/usuarios-seg/:documento", main.actualizarUsuarioClave)
 
+router.get("/usuarios-ver/:documento", main.verificarUsuarioNumeroDocumento)
+
+router.post("/usuarios-ver-cor", main.verificarUsuarioCorreoElectronico)
+
+router.post("/usuarios-ver-seg", main.verificarUsuarioClave)
+
 router.post("/usuarios-ver", main.verificarUsuario)
 
 export default router

@@ -1,4 +1,4 @@
-import { pool } from '../db.js'
+import { Pool } from '../db.js'
 
 export class Reserva {
     constructor(r) {
@@ -13,7 +13,7 @@ export class Reserva {
 
     static async contarTodas() {
         try {
-            const [result] = await pool.query(
+            const [result] = await Pool.query(
                 "SELECT COUNT(*) as num FROM reservas"
             )
 
