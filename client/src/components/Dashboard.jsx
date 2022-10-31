@@ -35,13 +35,13 @@ function Dashboard() {
 
                 <main className="h-full overflow-y-auto">
                     <Routes>
-                        <Route path="/" element={<InicioPage />} />
+                        <Route path="/*" element={<InicioPage />} />
                         <Route path="/ajustes" element={<AjustesPage />} />
-                        <Route path="/personas" element={<PersonasPage />} />
-                        <Route path="/reservas-club" element={<ReservasClubPage />} />
-                        <Route path="/eventos-club" element={<EventosClubPage />} />
-                        <Route path="/solicitudes-vives" element={<SolicitudesVivesPage />} />
-                        <Route path="/contratos-vives" element={<ContratosVivesPage />} />
+                        <Route path="/personas/*" element={<PersonasPage />} />
+                        <Route path="/reservas-club/*" element={<ReservasClubPage />} />
+                        <Route path="/eventos-club/*" element={<EventosClubPage />} />
+                        <Route path="/solicitudes-vives/*" element={<SolicitudesVivesPage />} />
+                        <Route path="/contratos-vives/*" element={<ContratosVivesPage />} />
                         <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                 </main>

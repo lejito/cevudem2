@@ -2,23 +2,11 @@ import { useContext, useState, useEffect } from "react";
 import { Context } from './Context'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
-import {
-    requestBuscarUsuarios,
-    requestBuscarUsuario,
-    requestInsertarUsuario,
-    requestActualizarUsuario,
-    requestActualizarUsuarioDatosDocumento,
-    requestActualizarUsuarioDatosPersonales,
-    requestActualizarUsuarioDatosSeguridad,
-    requestVerificarUsuario,
-    requestVerificarUsuarioDocumento,
-    requestVerificarUsuarioCorreo,
-    requestVerificarUsuarioClave
-} from '../api/usuarios.api'
-import { requestContarReservas } from '../api/reservas.api'
-import { requestContarEventos } from '../api/eventos.api'
-import { requestContarSolicitudes } from '../api/solicitudes.api'
-import { requestContarContratos } from '../api/contratos.api'
+import * as Usuarios from '../api/usuarios.api'
+import * as Reservas from '../api/reservas.api'
+import * as Eventos from '../api/eventos.api'
+import * as Solicitudes from '../api/solicitudes.api'
+import * as Contratos from '../api/contratos.api'
 
 export const useAppContext = () => {
     const context = useContext(Context)
@@ -38,11 +26,13 @@ export const ContextProvider = ({ children }) => {
 
     async function actualizarDatosSesion() {
         try {
-            const datosSesion = await buscarUsuario(sesion.documento)
-            localStorage.setItem(
-                'loggedAppUser', JSON.stringify(datosSesion)
-            )
-            setSesion(datosSesion)
+            if (sesion) {
+                const datosSesion = await buscarUsuario(sesion.documento)
+                localStorage.setItem(
+                    'loggedAppUser', JSON.stringify(datosSesion)
+                )
+                setSesion(datosSesion)
+            }
         }
         catch (error) {
             console.log(error)
@@ -50,9 +40,9 @@ export const ContextProvider = ({ children }) => {
     }
 
     useEffect(() => {
-      actualizarDatosSesion()
+        actualizarDatosSesion()
     }, [])
-    
+
 
     const logout = () => {
         localStorage.clear()
@@ -81,7 +71,7 @@ export const ContextProvider = ({ children }) => {
 
     async function buscarUsuarios() {
         try {
-            const response = await requestBuscarUsuarios()
+            const response = await Usuarios.requestBuscarUsuarios()
             setUsuarios(response.data)
         }
         catch (error) {
@@ -91,7 +81,7 @@ export const ContextProvider = ({ children }) => {
 
     const buscarUsuario = async (documento) => {
         try {
-            const response = await requestBuscarUsuario(documento)
+            const response = await Usuarios.requestBuscarUsuario(documento)
             return response.data
         }
         catch (error) {
@@ -101,7 +91,7 @@ export const ContextProvider = ({ children }) => {
 
     const insertarUsuario = async (datos) => {
         try {
-            const response = await requestInsertarUsuario(datos)
+            const response = await Usuarios.requestInsertarUsuario(datos)
             return response.data
         }
         catch (error) {
@@ -111,7 +101,7 @@ export const ContextProvider = ({ children }) => {
 
     const actualizarUsuario = async (documento, datos) => {
         try {
-            const response = await requestActualizarUsuario(documento, datos)
+            const response = await Usuarios.requestActualizarUsuario(documento, datos)
             return response.data
         }
         catch (error) {
@@ -121,7 +111,7 @@ export const ContextProvider = ({ children }) => {
 
     const actualizarUsuarioDocumento = async (documento, datos) => {
         try {
-            const response = await requestActualizarUsuarioDatosDocumento(documento, datos)
+            const response = await Usuarios.requestActualizarUsuarioDatosDocumento(documento, datos)
             return response.data
         }
         catch (error) {
@@ -131,7 +121,7 @@ export const ContextProvider = ({ children }) => {
 
     const actualizarUsuarioPersonales = async (documento, datos) => {
         try {
-            const response = await requestActualizarUsuarioDatosPersonales(documento, datos)
+            const response = await Usuarios.requestActualizarUsuarioDatosPersonales(documento, datos)
             return response.data
         }
         catch (error) {
@@ -141,7 +131,7 @@ export const ContextProvider = ({ children }) => {
 
     const actualizarUsuarioSeguridad = async (documento, datos) => {
         try {
-            const response = await requestActualizarUsuarioDatosSeguridad(documento, datos)
+            const response = await Usuarios.requestActualizarUsuarioDatosSeguridad(documento, datos)
             return response.data
         }
         catch (error) {
@@ -151,7 +141,7 @@ export const ContextProvider = ({ children }) => {
 
     const verificarUsuario = async (datos) => {
         try {
-            const response = await requestVerificarUsuario(datos)
+            const response = await Usuarios.requestVerificarUsuario(datos)
             return response.data
         }
         catch (error) {
@@ -161,7 +151,7 @@ export const ContextProvider = ({ children }) => {
 
     const verificarUsuarioDocumento = async (documento) => {
         try {
-            const response = await requestVerificarUsuarioDocumento(documento)
+            const response = await Usuarios.requestVerificarUsuarioDocumento(documento)
             return response.data
         }
         catch (error) {
@@ -171,7 +161,7 @@ export const ContextProvider = ({ children }) => {
 
     const verificarUsuarioCorreo = async (datos) => {
         try {
-            const response = await requestVerificarUsuarioCorreo(datos)
+            const response = await Usuarios.requestVerificarUsuarioCorreo(datos)
             return response.data
         }
         catch (error) {
@@ -181,7 +171,7 @@ export const ContextProvider = ({ children }) => {
 
     const verificarUsuarioClave = async (datos) => {
         try {
-            const response = await requestVerificarUsuarioClave(datos)
+            const response = await Usuarios.requestVerificarUsuarioClave(datos)
             return response.data
         }
         catch (error) {
@@ -195,7 +185,7 @@ export const ContextProvider = ({ children }) => {
 
     const contarReservas = async () => {
         try {
-            const response = await requestContarReservas()
+            const response = await Reservas.requestContarReservas()
             setNumReservas(response.data)
         }
         catch (error) {
@@ -209,7 +199,7 @@ export const ContextProvider = ({ children }) => {
 
     const contarEventos = async () => {
         try {
-            const response = await requestContarEventos()
+            const response = await Eventos.requestContarEventos()
             setNumEventos(response.data)
         }
         catch (error) {
@@ -223,7 +213,7 @@ export const ContextProvider = ({ children }) => {
 
     const contarSolicitudes = async () => {
         try {
-            const response = await requestContarSolicitudes()
+            const response = await Solicitudes.requestContarSolicitudes()
             setNumSolicitudes(response.data)
         }
         catch (error) {
@@ -237,7 +227,7 @@ export const ContextProvider = ({ children }) => {
 
     const contarContratos = async () => {
         try {
-            const response = await requestContarContratos()
+            const response = await Contratos.requestContarContratos()
             setNumContratos(response.data)
         }
         catch (error) {
@@ -249,7 +239,7 @@ export const ContextProvider = ({ children }) => {
     return (
         <Context.Provider value={{
             notif, sesion, setSesion, logout, actualizarDatosSesion,
-            usuarios, buscarUsuarios, buscarUsuario, actualizarUsuario, actualizarUsuarioDocumento, actualizarUsuarioPersonales, actualizarUsuarioSeguridad, verificarUsuario, verificarUsuarioDocumento, verificarUsuarioCorreo, verificarUsuarioClave,
+            usuarios, buscarUsuarios, buscarUsuario, insertarUsuario, actualizarUsuario, actualizarUsuarioDocumento, actualizarUsuarioPersonales, actualizarUsuarioSeguridad, verificarUsuario, verificarUsuarioDocumento, verificarUsuarioCorreo, verificarUsuarioClave,
             numReservas, contarReservas,
             numEventos, contarEventos,
             numSolicitudes, contarSolicitudes,
