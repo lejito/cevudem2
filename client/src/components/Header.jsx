@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { Dropdown, Avatar } from "flowbite-react"
 import userPicture from '../assets/img/user.png'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, NavLink } from 'react-router-dom'
 import { useAppContext } from '../context/Provider'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGears, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 
 function Header() {
@@ -55,6 +57,32 @@ function Header() {
                 </div>
 
                 <div className="absolute top-10 right-0 mr-5">
+                    <div className="inline-flex items-center font-bold mr-4" style={{ borderRight: '1px solid #7a7a7a', paddingRight: 20 }}>
+                        <img style={{ width: 40 }} alt="User settings" className="!rounded-full rounded w-10 h-10 rounded" src={userPicture} />
+                        <h2
+                            className="ml-2"
+                            style={{
+                                color: 'black',
+                                fontWeight: 'bolder',
+                            }}>{sesion !== null ? (sesion.primer_nombre + " " + sesion.primer_apellido) : null}
+                        </h2>
+                    </div>
+
+                    <NavLink to="/dashboard/ajustes">
+                        <div className="inline-flex items-center font-bold mr-4" style={{ borderRight: '1px solid #7a7a7a', paddingRight: 20 }}>
+                            <FontAwesomeIcon className="!rounded-full rounded w-10 h-10 rounded" icon={faGears} size="2xl" color="#333333"></FontAwesomeIcon>
+                        </div>
+                    </NavLink>
+
+                    <NavLink onClick={logout}>
+                        <div className="inline-flex items-center font-bold mr-4">
+                            <FontAwesomeIcon className="!rounded-full rounded w-10 h-10 rounded" icon={faRightFromBracket} size="2xl" color="#333333"></FontAwesomeIcon>
+                        </div>
+                    </NavLink>
+                </div>
+
+                {/*
+                <div className="absolute top-10 right-0 mr-5">
                     <Avatar style={{ width: 80, height: 80 }} alt="User settings" img={userPicture} rounded={true}>
                         <Dropdown
                             arrowIcon={true}
@@ -77,6 +105,7 @@ function Header() {
                         </Dropdown>
                     </Avatar>
                 </div>
+                    */}
             </div>
         </header>
     )
