@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2022 a las 03:59:13
+-- Tiempo de generación: 01-11-2022 a las 04:06:30
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -143,7 +143,7 @@ CREATE TABLE `eventos` (
 INSERT INTO `eventos` (`id`, `socio`, `fecha_hora_inicio`, `fecha_hora_fin`, `lugar`, `numero_asistentes`, `estado`) VALUES
 (1, '3858285', '2022-10-31 12:00:00', '2022-10-31 23:00:00', 4, 33, 'pendiente'),
 (2, '3858285', '2022-10-05 00:00:00', '2022-10-06 00:00:00', 6, 10, 'finalizado'),
-(3, '12345', '2022-11-11 11:00:00', '2022-11-11 17:00:00', 8, 15, 'cancelado');
+(3, '1234567', '2022-11-11 11:00:00', '2022-11-11 17:00:00', 8, 15, 'cancelado');
 
 -- --------------------------------------------------------
 
@@ -222,7 +222,7 @@ CREATE TABLE `personas` (
 INSERT INTO `personas` (`documento`, `tipo_documento`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `correo_electronico`, `telefono`, `rol`) VALUES
 ('100838020', 'cc', 'Mariana', 'Andrea', 'Giraldo', 'Builez', 'mariangb2000@gmail.com', '3194020432', 'estudiante'),
 ('1028458325', 'ti', 'Pepito', 'Andrés', 'Pérez', 'Bustamante', 'pepitopb@gmail.com', '3126652183', 'estudiante'),
-('12345', 'ce', 'Juanita', 'Niquiladora', 'XDD', 'LOLL', 'juanitaxdlol@gmail.com', '666', 'socio'),
+('1234567', 'cc', 'Laura', 'Sofía', 'Vergara', NULL, 'laurita2849@gmail.com', '1284348', 'socio'),
 ('23457927', 'cc', 'María', 'Josefa', 'López', 'Cardona', 'majosefal@outlook.es', '3147823264', 'acudiente'),
 ('3858285', 'ce', 'David', NULL, 'Gaviria', 'Restrepo', 'gaviriadavid042@outlook.es', '3112047692', 'socio'),
 ('45278317', 'cc', 'María', 'Anastasia', 'Rodríguez', 'Carmona', 'anasroca86@gmail.com', NULL, 'profesor'),
@@ -250,7 +250,7 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `socio`, `fecha_hora_inicio`, `fecha_hora_fin`, `habitacion`, `numero_agregados`, `estado`) VALUES
-(1, '12345', '2022-10-20 00:00:00', '2022-10-22 00:00:00', 202, '0', 'pendiente'),
+(1, '1234567', '2022-10-20 00:00:00', '2022-10-22 00:00:00', 202, '0', 'pendiente'),
 (2, '3858285', '2022-10-30 13:00:00', '2022-10-30 17:00:00', 301, '1', 'activa');
 
 -- --------------------------------------------------------
@@ -322,7 +322,8 @@ INSERT INTO `usuarios` (`documento`, `tipo_documento`, `primer_nombre`, `segundo
 ('1005566997', 'cc', 'Luis', 'Fernando', 'Aristizabal', 'Ramírez', 'laristizabal997@soyudemedellin.edu.co', '', 'administrador', 'fe008700f25cb28940ca8ed91b23b354', 0),
 ('1017933385', 'ce', 'Lorena', 'Cadavid', 'Gaviria', '', 'lcadavid385@soyudemedellin.edu.co', '333', 'administrador', 'fe008700f25cb28940ca8ed91b23b354', 0),
 ('1034503034', 'pa', 'Carlos', NULL, 'Caicedo', NULL, 'ccaicedo@gmail.com', '3146732976', 'ayudante', 'fe008700f25cb28940ca8ed91b23b354', 1),
-('987654321', 'ce', 'Marcelo', 'Andrés', 'Guerra', NULL, 'maguerra@gmail.com', '000', 'administrador', '123x', 0);
+('987654321', 'cc', 'Marcelo', 'Andrés', 'Guerra', NULL, 'maguerra@gmail.com', '999', 'ayudante', '123x', 0),
+('999', 'cc', 'Alejandro', NULL, 'Magno', NULL, 'amagno@macedonia.com', NULL, 'administrador', NULL, 0);
 
 --
 -- Índices para tablas volcadas
