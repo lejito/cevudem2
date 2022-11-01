@@ -75,7 +75,7 @@ function FormPersona() {
                         const respuesta = await actualizarPersona(params.documento, values,)
 
                         if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar editar la persona")
+                            notif("error", "Hubo un error al intentar editar la persona. Verifica que el número de documento o el correo electrónico no coincida con el de otra persona.")
                         }
                         else {
                             notif("success", "Persona editada correctamente.")
@@ -86,7 +86,7 @@ function FormPersona() {
                         const respuesta = await insertarPersona(values)
 
                         if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar añadir la persona")
+                            notif("error", "Hubo un error al intentar añadir la persona. Verifica que el número de documento o el correo electrónico no coincida con el de otra persona.")
                         }
                         else {
                             notif("success", "Persona añadida correctamente.")

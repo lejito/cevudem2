@@ -41,33 +41,27 @@ function PersonasPage() {
   const columns = [
     {
       id: 'documento',
-      label: 'Documento',
-      minWidth: 100
+      label: 'Documento'
     },
     {
       id: 'nombre_completo',
-      label: 'Nombre completo',
-      minWidth: 180
+      label: 'Nombre completo'
     },
     {
       id: 'correo_electronico',
-      label: 'Correo electrónico',
-      minWidth: 160
+      label: 'Correo electrónico'
     },
     {
       id: 'telefono',
-      label: 'Teléfono',
-      minWidth: 100
+      label: 'Teléfono'
     },
     {
       id: 'rol',
-      label: 'Rol',
-      minWidth: 100
+      label: 'Rol'
     },
     {
       id: 'opciones',
-      label: 'Opciones',
-      minWidth: 50
+      label: 'Opciones'
     }
   ]
 

@@ -51,12 +51,13 @@ export const ContextProvider = ({ children }) => {
         navigate("/")
     }
 
-    const notif = (type, message) => {
-        Swal.fire(
-            'Mensaje',
-            message,
-            type
-        )
+    const notif = (icon, text) => {
+        Swal.fire({
+            title: "Mensaje",
+            text,
+            icon,
+            confirmButtonText: "Aceptar"
+        })
     }
 
     //#region Usuarios
