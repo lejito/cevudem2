@@ -19,7 +19,8 @@ function FormUsuario() {
         segundo_apellido: "",
         correo_electronico: "",
         telefono: "",
-        rol: "administrador"
+        rol: "administrador",
+        bloqueo: "0"
     })
 
     function reset() {
@@ -32,7 +33,8 @@ function FormUsuario() {
             segundo_apellido: "",
             correo_electronico: "",
             telefono: "",
-            rol: "administrador"
+            rol: "administrador",
+            bloqueo: "0"
         })
         navigate("../")
     }
@@ -50,7 +52,8 @@ function FormUsuario() {
                     segundo_apellido: usuario.segundo_apellido,
                     correo_electronico: usuario.correo_electronico,
                     telefono: usuario.telefono,
-                    rol: usuario.rol
+                    rol: usuario.rol,
+                    bloqueo: usuario.bloqueo
                 })
             }
         }
@@ -228,6 +231,21 @@ function FormUsuario() {
                                 >
                                     <option value="administrador">Administrador/a</option>
                                     <option value="ayudante">Ayudante</option>
+                                </select>
+                            </label>
+                            <label className="block text-sm">
+                                <span className="text-gray-700 dark:text-gray-400">
+                                    Estado de bloqueo
+                                </span>
+                                <select
+                                    className="block w-full mt-1 text-sm form-select focus:border-primary focus:outline-none focus:shadow-outline-primary"
+                                    name="bloqueo"
+                                    required
+                                    onChange={handleChange}
+                                    value={values.bloqueo}
+                                >
+                                    <option value="0">Desbloqueado</option>
+                                    <option value="1">Bloqueado</option>
                                 </select>
                             </label>
                         </div>
