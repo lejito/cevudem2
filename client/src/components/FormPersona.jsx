@@ -5,12 +5,12 @@ import { Form, Formik } from 'formik'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIdCard, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
 
-function FormUsuario() {
+function FormPersona() {
     const params = useParams()
     const navigate = useNavigate()
-    const { notif, buscarUsuario, insertarUsuario, actualizarUsuario } = useAppContext()
+    const { notif, buscarPersona, insertarPersona, actualizarPersona } = useAppContext()
 
-    const [usuario, setUsuario] = useState({
+    const [persona, setPersona] = useState({
         documento: "",
         tipo_documento: "cc",
         primer_nombre: "",
@@ -19,11 +19,11 @@ function FormUsuario() {
         segundo_apellido: "",
         correo_electronico: "",
         telefono: "",
-        rol: "administrador"
+        rol: "estudiante"
     })
 
     function reset() {
-        setUsuario({
+        setPersona({
             documento: "",
             tipo_documento: "cc",
             primer_nombre: "",
@@ -32,63 +32,64 @@ function FormUsuario() {
             segundo_apellido: "",
             correo_electronico: "",
             telefono: "",
-            rol: "administrador"
+            rol: "estudiante"
         })
         navigate("../")
     }
 
     useEffect(() => {
-        const cargarUsuario = async () => {
+        const cargarPersona = async () => {
             if (params.documento) {
-                const usuario = await buscarUsuario(params.documento)
-                setUsuario({
-                    documento: usuario.documento,
-                    tipo_documento: usuario.tipo_documento,
-                    primer_nombre: usuario.primer_nombre,
-                    segundo_nombre: usuario.segundo_nombre,
-                    primer_apellido: usuario.primer_apellido,
-                    segundo_apellido: usuario.segundo_apellido,
-                    correo_electronico: usuario.correo_electronico,
-                    telefono: usuario.telefono,
-                    rol: usuario.rol
+                const persona = await buscarPersona(params.documento)
+                
+                setPersona({
+                    documento: persona.documento,
+                    tipo_documento: persona.tipo_documento,
+                    primer_nombre: persona.primer_nombre,
+                    segundo_nombre: persona.segundo_nombre,
+                    primer_apellido: persona.primer_apellido,
+                    segundo_apellido: persona.segundo_apellido,
+                    correo_electronico: persona.correo_electronico,
+                    telefono: persona.telefono,
+                    rol: persona.rol
                 })
             }
         }
 
-        cargarUsuario()
+        cargarPersona()
     }, [])
 
 
     return (
         <div className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md">
             <h4 className="mb-4 text-lg font-semibold text-gray-600 ">
-                {params.documento ? `Editar usuario [${params.documento}]` : "Añadir usuario"}
+                {params.documento ? `Editar persona [${params.documento}]` : "Añadir persona"}
             </h4>
 
             <Formik
-                initialValues={usuario}
+                initialValues={persona}
                 enableReinitialize={true}
 
                 onSubmit={async (values) => {
                     if (params.documento) {
-                        const respuesta = await actualizarUsuario(params.documento, values,)
+                        const respuesta = await actualizarPersona(params.documento, values,)
 
                         if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar editar el usuario")
+                            notif("error", "Hubo un error al intentar editar la persona")
                         }
                         else {
-                            notif("success", "Usuario editado correctamente.")
+                            notif("success", "Persona editada correctamente.")
                             reset()
                         }
                     }
                     else {
-                        const respuesta = await insertarUsuario(values)
+                        const respuesta = await insertarPersona(values)
 
                         if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar añadir el usuario")
+                            notif("error", "Hubo un error al intentar añadir la persona")
                         }
                         else {
-                            notif("success", "Usuario añadido correctamente.")
+                            notif("success", "Persona añadida correctamente.")
                             reset()
                         }
                     }
@@ -111,6 +112,7 @@ function FormUsuario() {
                                     <option value="cc">CC - Cédula de ciudadanía</option>
                                     <option value="ce">CE - Cédula de extranjería</option>
                                     <option value="pa">PA - Pasaporte</option>
+                                    <option value="ti">TI - Tarjeta de identidad</option>
                                 </select>
                             </label>
                             <label className="block text-sm">
@@ -226,8 +228,12 @@ function FormUsuario() {
                                     onChange={handleChange}
                                     value={values.rol}
                                 >
-                                    <option value="administrador">Administrador/a</option>
-                                    <option value="ayudante">Ayudante</option>
+                                    <option value="estudiante">Estudiante</option>
+                                    <option value="profesor">Profesor</option>
+                                    <option value="empleado">Empleado</option>
+                                    <option value="socio">Socio</option>
+                                    <option value="externo">Externo</option>
+                                    <option value="acudiente">Acudiente</option>
                                 </select>
                             </label>
                         </div>
@@ -255,4 +261,4 @@ function FormUsuario() {
     )
 }
 
-export default FormUsuario
+export default FormPersona

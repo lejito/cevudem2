@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useAppContext } from '../context/Provider'
 import { useNavigate, Routes, Route, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,17 +7,13 @@ import UsersList from '../components/UsersList'
 import FormUsuario from '../components/FormUsuario'
 
 function InicioPage() {
-
   const {
-    sesion,
-    usuarios, buscarUsuario, buscarUsuarios,
+    usuarios, buscarUsuarios,
     numReservas, contarReservas,
     numEventos, contarEventos,
     numSolicitudes, contarSolicitudes,
     numContratos, contarContratos
   } = useAppContext()
-
-  const navigate = useNavigate()
 
   function cargarEstadisticas() {
     contarReservas()
@@ -27,10 +23,6 @@ function InicioPage() {
   }
 
   useEffect(() => {
-    if (!sesion) {
-      navigate("/")
-    }
-
     cargarEstadisticas()
     buscarUsuarios()
   }, [])
@@ -138,27 +130,27 @@ function InicioPage() {
         </div>
       </div>
 
-      <hr className="mb-8"/>
+      <hr className="mb-8" />
 
       <div className="flex items-center justify-between gap-6">
-      <h4 className="mb-4 text-lg font-semibold text-dark">
-        Gestionar equipo
-      </h4>
+        <h4 className="mb-4 text-lg font-semibold text-dark">
+          Gestionar equipo
+        </h4>
 
-      <Link to="./add">
-        <button className="flex items-center justify-between px-4 py-2 mb-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg hover:bg-blue-500 focus:outline-none focus:shadow-outline-purple">
-          <svg className="w-4 h-4 mr-2 -ml-1" fill="currentColor" aria-hidden="true" viewBox="0 0 20 20">
-            <FontAwesomeIcon icon={faUserPlus}></FontAwesomeIcon>
-          </svg>
-          <span>Añadir miembro</span>
-        </button>
-      </Link>
+        <Link to="./add">
+          <button className="flex items-center justify-between px-4 py-2 mb-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg hover:bg-blue-500 focus:outline-none focus:shadow-outline-purple">
+            <svg className="w-4 h-4 mr-2 -ml-1" fill="currentColor" aria-hidden="true" viewBox="0 0 20 20">
+              <FontAwesomeIcon icon={faUserPlus}></FontAwesomeIcon>
+            </svg>
+            <span>Añadir miembro</span>
+          </button>
+        </Link>
       </div>
 
       <Routes>
         <Route path="/" element={<UsersList users={usuarios} />} />
-        <Route path="/add" element={<FormUsuario/>} />
-        <Route path="/edit/:documento" element={<FormUsuario/>} />
+        <Route path="/add" element={<FormUsuario />} />
+        <Route path="/edit/:documento" element={<FormUsuario />} />
       </Routes>
     </div>
   )

@@ -15,7 +15,7 @@ export class Persona {
 
     static async buscarTodas() {
         try {
-            const [result] = await pool.query(
+            const [result] = await Pool.query(
                 "SELECT documento, tipo_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, correo_electronico, telefono, rol FROM personas"
             )
 
@@ -38,7 +38,7 @@ export class Persona {
 
     async buscar() {
         try {
-            const [result] = await pool.query(
+            const [result] = await Pool.query(
                 "SELECT documento, tipo_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, correo_electronico, telefono, rol FROM personas WHERE documento = ?",
                 this.documento
             )
@@ -67,7 +67,7 @@ export class Persona {
 
     async insertar() {
         try {
-            const [result] = await pool.query(
+            const [result] = await Pool.query(
                 "INSERT INTO personas(documento, tipo_documento, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, correo_electronico, telefono, rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 [
                     this.documento,
@@ -97,7 +97,7 @@ export class Persona {
 
     async actualizar(documento) {
         try {
-            const [result] = await pool.query(
+            const [result] = await Pool.query(
                 "UPDATE personas SET documento = ?, tipo_documento = ?, primer_nombre = ?, segundo_nombre = ?, primer_apellido = ?, segundo_apellido = ?, correo_electronico = ?, telefono = ?, rol = ? WHERE documento = ?",
                 [
                     this.documento,
@@ -110,6 +110,28 @@ export class Persona {
                     this.telefono,
                     this.rol,
                     documento
+                ]
+            )
+
+            if (result.affectedRows === 0) {
+                return false
+            }
+            else {
+                return true
+            }
+        }
+        catch (error) {
+            console.log(error)
+            return error
+        }
+    }
+
+    async eliminar() {
+        try {
+            const [result] = await Pool.query(
+                "DELETE FROM personas WHERE documento = ?",
+                [
+                    this.documento
                 ]
             )
 

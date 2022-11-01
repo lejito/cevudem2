@@ -54,7 +54,7 @@ function UserCard({ user }) {
                         </p>
                         <Link to={`./edit/${user.documento}`}>
                             <button className="flex items-center justify-between px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-orange border border-transparent rounded-lg hover:bg-orange focus:outline-none focus:shadow-outline-purple">
-                                <svg className="w-4 h-4 mr-2 -ml-1" fill="currentColor" aria-hidden="true" viewBox="0 0 20 20">
+                                <svg className="w-4 h-4 mr-2 ml-1" fill="currentColor" aria-hidden="true" viewBox="0 0 20 20">
                                     <FontAwesomeIcon icon={faPencil}></FontAwesomeIcon>
                                 </svg>
                                 <span>Editar</span>

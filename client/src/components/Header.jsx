@@ -32,7 +32,7 @@ function Header() {
                 }}
             >
 
-                <div className="inline-flex items-center font-bold mr-4" href="/dashboard" style={{borderRight: '1px solid #7a7a7a', paddingRight: 20}}>
+                <div className="inline-flex items-center font-bold mr-4" href="/dashboard" style={{ borderRight: '1px solid #7a7a7a', paddingRight: 20 }}>
                     <img style={{ width: 50 }} alt="User settings" className="!rounded-full rounded w-10 h-10 rounded" src="/src/assets/img/Logo_Club_Egresado.png" />
                     <h2
                         className="ml-4"
@@ -57,7 +57,6 @@ function Header() {
                 <div className="absolute top-10 right-0 mr-5">
                     <Avatar style={{ width: 80, height: 80 }} alt="User settings" img={userPicture} rounded={true}>
                         <Dropdown
-                            style={{ width: 150, height: 150 }}
                             arrowIcon={true}
                             inline={true}
                             onFocus={false}

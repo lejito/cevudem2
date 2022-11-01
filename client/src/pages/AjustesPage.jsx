@@ -44,22 +44,22 @@ function AjustesPage() {
               const verifNumDocumento = await verificarUsuarioDocumento(usuario.documento)
 
               if (usuario.documento !== sesion.documento && verifNumDocumento) {
-                notif("warning", "Ya existe un usuario con el número de documento ingresado.", 100)
+                notif("warning", "Ya existe un usuario con el número de documento ingresado.")
               }
               else {
                 const respuesta = await actualizarUsuarioDocumento(sesion.documento, values)
 
                 if (respuesta.error) {
-                  notif("error", "Ha ocurrido un error en el sistema al actualizar el documento.", 101)
+                  notif("error", "Ha ocurrido un error en el sistema al actualizar el documento.")
                 }
                 else {
                   const nuevoUsuario = await buscarUsuario(usuario.documento)
 
                   if (nuevoUsuario.error) {
-                    notif("error", "Ha ocurrido un error en el sistema al obtener los nuevos datos.", 102)
+                    notif("error", "Ha ocurrido un error en el sistema al obtener los nuevos datos.")
                   }
                   else {
-                    notif("success", "Documento de identidad actualizado correctamente.", 103)
+                    notif("success", "Documento de identidad actualizado correctamente.")
                     localStorage.setItem(
                       'loggedAppUser', JSON.stringify(nuevoUsuario)
                     )
@@ -146,22 +146,22 @@ function AjustesPage() {
               const verifCorreo = await verificarUsuarioCorreo(usuario)
 
               if (usuario.correo_electronico !== sesion.correo_electronico && verifCorreo) {
-                notif("warning", "Ya existe un usuario con el correo electrónico ingresado.", 200)
+                notif("warning", "Ya existe un usuario con el correo electrónico ingresado.")
               }
               else {
                 const respuesta = await actualizarUsuarioPersonales(sesion.documento, usuario)
 
                 if (respuesta.error) {
-                  notif("error", "Ha ocurrido un error en el sistema al actualizar los datos personales.", 201)
+                  notif("error", "Ha ocurrido un error en el sistema al actualizar los datos personales.")
                 }
                 else {
                   const nuevoUsuario = await buscarUsuario(sesion.documento)
 
                   if (nuevoUsuario.error) {
-                    notif("error", "Ha ocurrido un error en el sistema al obtener los nuevos datos.", 202)
+                    notif("error", "Ha ocurrido un error en el sistema al obtener los nuevos datos.")
                   }
                   else {
-                    notif("success", "Datos personales actualizados correctamente.", 203)
+                    notif("success", "Datos personales actualizados correctamente.")
                     localStorage.setItem(
                       'loggedAppUser', JSON.stringify(nuevoUsuario)
                     )
@@ -293,10 +293,10 @@ function AjustesPage() {
               const verifClave = await verificarUsuarioClave(usuario)
 
               if (!verifClave) {
-                notif("warning", "La contraseña actual ingresada es incorrecta.", 300)
+                notif("warning", "La contraseña actual ingresada es incorrecta.")
               }
               else if (values.nclave1 !== values.nclave2) {
-                notif("warning", "Las contraseñas no coinciden.", 301)
+                notif("warning", "Las contraseñas no coinciden.")
               }
               else {
                 const nuevoUsuario = {
@@ -306,10 +306,10 @@ function AjustesPage() {
                 const respuesta = await actualizarUsuarioSeguridad(sesion.documento, nuevoUsuario)
 
                 if (respuesta.error) {
-                  notif("error", "Ha ocurrido un error en el sistema al actualizar la contraseña.", 302)
+                  notif("error", "Ha ocurrido un error en el sistema al actualizar la contraseña.")
                 }
                 else {
-                  notif("success", "Contraseña actualizada correctamente.", 303)
+                  notif("success", "Contraseña actualizada correctamente.")
                   values.clave = ""
                   values.nclave1 = ""
                   values.nclave2 = ""

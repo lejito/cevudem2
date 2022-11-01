@@ -1,8 +1,9 @@
 import { useContext, useState, useEffect } from "react";
 import { Context } from './Context'
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify';
+import Swal from 'sweetalert2'
 import * as Usuarios from '../api/usuarios.api'
+import * as Personas from '../api/personas.api'
 import * as Reservas from '../api/reservas.api'
 import * as Eventos from '../api/eventos.api'
 import * as Solicitudes from '../api/solicitudes.api'
@@ -50,20 +51,12 @@ export const ContextProvider = ({ children }) => {
         navigate("/")
     }
 
-    const notif = (type, message, id) => {
-        switch (type) {
-            case "success":
-                toast.success(message, { toastId: id })
-                break;
-            case "warning":
-                toast.warning(message, { toastId: id })
-                break;
-            case "error":
-                toast.error(message, { toastId: id })
-                break;
-            default:
-                break;
-        }
+    const notif = (type, message) => {
+        Swal.fire(
+            'Mensaje',
+            message,
+            type
+        )
     }
 
     //#region Usuarios
@@ -92,6 +85,7 @@ export const ContextProvider = ({ children }) => {
     const insertarUsuario = async (datos) => {
         try {
             const response = await Usuarios.requestInsertarUsuario(datos)
+            buscarUsuarios()
             return response.data
         }
         catch (error) {
@@ -102,6 +96,7 @@ export const ContextProvider = ({ children }) => {
     const actualizarUsuario = async (documento, datos) => {
         try {
             const response = await Usuarios.requestActualizarUsuario(documento, datos)
+            buscarUsuarios()
             return response.data
         }
         catch (error) {
@@ -112,6 +107,7 @@ export const ContextProvider = ({ children }) => {
     const actualizarUsuarioDocumento = async (documento, datos) => {
         try {
             const response = await Usuarios.requestActualizarUsuarioDatosDocumento(documento, datos)
+            buscarUsuarios()
             return response.data
         }
         catch (error) {
@@ -122,6 +118,7 @@ export const ContextProvider = ({ children }) => {
     const actualizarUsuarioPersonales = async (documento, datos) => {
         try {
             const response = await Usuarios.requestActualizarUsuarioDatosPersonales(documento, datos)
+            buscarUsuarios()
             return response.data
         }
         catch (error) {
@@ -132,6 +129,7 @@ export const ContextProvider = ({ children }) => {
     const actualizarUsuarioSeguridad = async (documento, datos) => {
         try {
             const response = await Usuarios.requestActualizarUsuarioDatosSeguridad(documento, datos)
+            buscarUsuarios()
             return response.data
         }
         catch (error) {
@@ -172,6 +170,63 @@ export const ContextProvider = ({ children }) => {
     const verificarUsuarioClave = async (datos) => {
         try {
             const response = await Usuarios.requestVerificarUsuarioClave(datos)
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    //#endregion
+
+    //#region Personas
+    const [personas, setPersonas] = useState([])
+
+    async function buscarPersonas() {
+        try {
+            const response = await Personas.requestBuscarPersonas()
+            setPersonas(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    const buscarPersona = async (documento) => {
+        try {
+            const response = await Personas.requestBuscarPersona(documento)
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    const insertarPersona = async (datos) => {
+        try {
+            const response = await Personas.requestInsertarPersona(datos)
+            buscarPersonas()
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    const actualizarPersona = async (documento, datos) => {
+        try {
+            const response = await Personas.requestActualizarPersona(documento, datos)
+            buscarPersonas()
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    const eliminarPersona = async (documento) => {
+        try {
+            const response = await Personas.requestEliminarPersona(documento)
+            buscarPersonas()
             return response.data
         }
         catch (error) {
@@ -240,6 +295,7 @@ export const ContextProvider = ({ children }) => {
         <Context.Provider value={{
             notif, sesion, setSesion, logout, actualizarDatosSesion,
             usuarios, buscarUsuarios, buscarUsuario, insertarUsuario, actualizarUsuario, actualizarUsuarioDocumento, actualizarUsuarioPersonales, actualizarUsuarioSeguridad, verificarUsuario, verificarUsuarioDocumento, verificarUsuarioCorreo, verificarUsuarioClave,
+            personas, buscarPersonas, buscarPersona, insertarPersona, actualizarPersona, eliminarPersona,
             numReservas, contarReservas,
             numEventos, contarEventos,
             numSolicitudes, contarSolicitudes,

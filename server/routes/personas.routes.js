@@ -13,4 +13,6 @@ router.post("/personas", main.insertarPersona)
 
 router.put("/personas/:documento", main.actualizarPersona)
 
+router.delete("/personas/:documento", main.eliminarPersona)
+
 export default router

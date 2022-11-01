@@ -1,73 +1,132 @@
+import { useEffect } from 'react'
+import { Routes, Route, Link } from 'react-router-dom'
+import { useAppContext } from '../context/Provider'
 import TableComponent from '../components/TableComponent'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserPlus, faUserEdit, faUserMinus } from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
+import Swal from 'sweetalert2'
+import FormPersona from '../components/FormPersona'
 
 function PersonasPage() {
+  const { notif, personas, buscarPersonas, actualizarPersona, eliminarPersona } = useAppContext()
+
+  useEffect(() => {
+    buscarPersonas()
+  }, [])
+
+  function borrarPersona(documento) {
+    Swal.fire({
+      title: 'Eliminar persona',
+      text: `¿Está seguro/a de eliminar a la persona ${documento}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#c92534',
+      cancelButtonColor: '#7a7a7a',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const respuesta = await eliminarPersona(documento)
+
+        if (respuesta.error) {
+          notif("error", "Hubo un error al intentar eliminar la persona. Probablemente sea porque hay procesos asociados a nombre de dicha persona.")
+        }
+        else {
+          notif("success", "Persona eliminada correctamente.")
+        }
+      }
+    })
+  }
+
   const columns = [
     {
       id: 'documento',
       label: 'Documento',
-      minWidth: 170
-    },
-    {
-      id: 'nombre_completo',
-      label: 'Nombre Completo',
       minWidth: 100
     },
     {
+      id: 'nombre_completo',
+      label: 'Nombre completo',
+      minWidth: 180
+    },
+    {
       id: 'correo_electronico',
-      label: 'Correo Electrónico',
-      minWidth: 170,
-      align: 'right',
+      label: 'Correo electrónico',
+      minWidth: 160
     },
     {
       id: 'telefono',
       label: 'Teléfono',
-      minWidth: 170,
-      align: 'right',
+      minWidth: 100
     },
     {
       id: 'rol',
       label: 'Rol',
-      minWidth: 170,
-      align: 'right',
+      minWidth: 100
     },
+    {
+      id: 'opciones',
+      label: 'Opciones',
+      minWidth: 50
+    }
+  ]
 
-  ];
-
-  function createData(documento, nombre_completo, correo_electronico, telefono, rol,) {
-    return { documento, nombre_completo, correo_electronico, telefono, rol, };
-  }
-
-  const rows = [
-    createData( 1324171354, 3287263, 'sdasd', 'sdasd', 'sdasdasd', 'sdasd'),
-   createData(13435153, 'andres perez','perezjuan@gmail.com', 3134567543, 'Administrador' ),
-   createData(44435153, 'juan perez','perezjuan@gmail.com', 313453453567543, 'Administrador' ),
-   createData(53454435153, 'camilo rodriguez','camrodriguez@gmail.com', 3134567533343, 'Administrador' )
-
-  ];
+  let rows = personas.map((p) => {
+    return {
+      documento: `${p.tipo_documento.toUpperCase()} ${p.documento}`,
+      nombre_completo: `${p.primer_nombre} ${p.segundo_nombre ? p.segundo_nombre : ""} ${p.primer_apellido} ${p.segundo_apellido ? p.segundo_apellido : ""}`,
+      correo_electronico: p.correo_electronico,
+      telefono: p.telefono,
+      rol: p.rol[0].toUpperCase() + p.rol.slice(1),
+      opciones: (
+        <div className="flex items-center">
+          <Link to={`./edit/${p.documento}`} className="mr-1">
+            <button className="flex items-center justify-between px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-orange border border-transparent rounded-md hover:bg-orange focus:outline-none focus:shadow-outline-purple">
+              <svg className="w-4 h-4" fill="currentColor" aria-hidden="true" viewBox="0 0 20 20">
+                <FontAwesomeIcon icon={faPencil}></FontAwesomeIcon>
+              </svg>
+            </button>
+          </Link>
+          <button
+            className="flex items-center justify-between px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-secondary border border-transparent rounded-md hover:bg-secondary focus:outline-none focus:shadow-outline-purple"
+            onClick={() => { borrarPersona(p.documento) }}
+          >
+            <svg className="w-4 h-4" fill="currentColor" aria-hidden="true" viewBox="0 0 20 20">
+              <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+            </svg>
+          </button>
+        </div>
+      )
+    }
+  })
 
   return (
     <div className="container px-6 mx-auto grid">
-      <h2
-        className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
-      >
-        Inicio &gt; Personas
-      </h2>
-      <div className="flex mb-4">
-        <button className="inline-flex items-center mr-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
-          style={{
-            backgroundColor: 'blue',
-            color: 'white'
-          }}>
-          <FontAwesomeIcon icon={faUserPlus} className="h-5 w-5 mr-2" />
-          Registrar persona
-        </button>
+      <div className="flex items-center justify-between">
+        <h2
+          className="my-6 text-2xl font-semibold text-dark"
+        >
+          Inicio &gt; Personas
+        </h2>
+        <div className="my-6 flex mb-4">
+          <Link to="./add">
+            <button className="flex items-center justify-between px-4 py-2 mb-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg hover:bg-blue-500 focus:outline-none focus:shadow-outline-purple">
+              <svg className="w-4 h-4 mr-2 -ml-1" fill="currentColor" aria-hidden="true" viewBox="0 0 20 20">
+                <FontAwesomeIcon icon={faUserPlus}></FontAwesomeIcon>
+              </svg>
+              <span>Añadir persona</span>
+            </button>
+          </Link>
+        </div>
       </div>
 
-      <TableComponent columns={columns} rows={rows} />
+      <Routes>
+        <Route path="/" element={<TableComponent columns={columns} rows={rows} />} />
+        <Route path="/add" element={<FormPersona/>} />
+        <Route path="/edit/:documento" element={<FormPersona/>} />
+      </Routes>
     </div>
   )
- }
+}
 
- export default PersonasPage
+export default PersonasPage

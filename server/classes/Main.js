@@ -283,6 +283,25 @@ export class Main {
             res.json({ error: error.message })
         }
     }
+
+    async eliminarPersona(req, res) {
+        try {
+            const persona = new Persona(req.params)
+            const respuesta = await persona.eliminar()
+    
+            if (respuesta === true) {
+                res.json(respuesta)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Persona no eliminada" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
     //#endregion
 
     //#region Reservas
