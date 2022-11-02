@@ -448,6 +448,100 @@ export class Main {
             res.json({ error: error.message })
         }
     }
+
+    async buscarSolicitudes(req, res) {
+        try {
+            const respuesta = await Solicitud.buscarTodas()
+
+            if (respuesta) {
+                res.json(respuesta)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Solicitudes no encontradas" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async buscarSolicitud(req, res) {
+        try {
+            const solicitud = new Solicitud(req.params)
+            const respuesta = await solicitud.buscar()
+
+            if (respuesta === true) {
+                res.json(solicitud)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Solicitud no encontrada" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async insertarSolicitud(req, res) {
+        try {
+            const solicitud = new Solicitud(req.body)
+            const respuesta = await solicitud.insertar()
+
+            if (respuesta === true) {
+                res.json(solicitud)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Solicitud no insertada" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async actualizarSolicitud(req, res) {
+        try {
+            const solicitud = new Solicitud(req.body)
+            const respuesta = await solicitud.actualizar(req.params.id)
+
+            if (respuesta === true) {
+                res.json(solicitud)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Solicitud no actualizada" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async eliminarSolicitud(req, res) {
+        try {
+            const solicitud = new Solicitud(req.params)
+            const respuesta = await solicitud.eliminar()
+
+            if (respuesta === true) {
+                res.json(respuesta)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Solicitud no eliminada" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
     //#endregion
 
     //#region Contratos

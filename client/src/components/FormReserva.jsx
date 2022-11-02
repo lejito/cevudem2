@@ -89,7 +89,7 @@ function FormReserva() {
                         const respuesta = await insertarReserva(values)
 
                         if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar añadir la reserva")
+                            notif("error", "Hubo un error al intentar añadir la reserva.")
                         }
                         else {
                             notif("success", "Reserva añadida correctamente.")

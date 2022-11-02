@@ -77,7 +77,7 @@ function FormUsuario() {
                         const respuesta = await actualizarUsuario(params.documento, values,)
 
                         if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar editar el usuario")
+                            notif("error", "Hubo un error al intentar editar el usuario.")
                         }
                         else {
                             notif("success", "Usuario editado correctamente.")
@@ -88,7 +88,7 @@ function FormUsuario() {
                         const respuesta = await insertarUsuario(values)
 
                         if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar añadir el usuario")
+                            notif("error", "Hubo un error al intentar añadir el usuario.")
                         }
                         else {
                             notif("success", "Usuario añadido correctamente.")

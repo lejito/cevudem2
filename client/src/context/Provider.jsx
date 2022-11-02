@@ -332,6 +332,61 @@ export const ContextProvider = ({ children }) => {
             console.log(error)
         }
     }
+
+    const [solicitudes, setSolicitudes] = useState([])
+
+    async function buscarSolicitudes() {
+        try {
+            const response = await Solicitudes.requestBuscarSolicitudes()
+            setSolicitudes(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function buscarSolicitud(id) {
+        try {
+            const response = await Solicitudes.requestBuscarSolicitud(id)
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function insertarSolicitud(datos) {
+        try {
+            const response = await Solicitudes.requestInsertarSolicitud(datos)
+            buscarSolicitudes()
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function actualizarSolicitud(id, datos) {
+        try {
+            const response = await Solicitudes.requestActualizarSolicitud(id, datos)
+            buscarSolicitudes()
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function eliminarSolicitud(id) {
+        try {
+            const response = await Solicitudes.requestEliminarSolicitud(id)
+            buscarSolicitudes()
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
     //#endregion
 
     //#region Contratos
@@ -369,7 +424,7 @@ export const ContextProvider = ({ children }) => {
             personas, buscarPersonas, buscarPersona, insertarPersona, actualizarPersona, eliminarPersona,
             numReservas, contarReservas, reservas, buscarReservas, buscarReserva, insertarReserva, actualizarReserva, eliminarReserva,
             numEventos, contarEventos,
-            numSolicitudes, contarSolicitudes,
+            numSolicitudes, contarSolicitudes, solicitudes, buscarSolicitudes, buscarSolicitud, insertarSolicitud, actualizarSolicitud, eliminarSolicitud,
             numContratos, contarContratos,
             habitaciones, buscarHabitaciones
         }}>
