@@ -4,13 +4,14 @@ import { Reserva } from './Reserva.js'
 import { Evento } from './Evento.js'
 import { Solicitud } from './Solicitud.js'
 import { Contrato } from './Contrato.js'
+import { Habitacion } from './Habitacion.js'
 
 export class Main {
     //#region Usuarios
     async buscarUsuarios(req, res) {
         try {
             const respuesta = await Usuario.buscarTodos()
-    
+
             if (respuesta) {
                 res.json(respuesta)
             }
@@ -29,7 +30,7 @@ export class Main {
         try {
             const usuario = new Usuario(req.params)
             const respuesta = await usuario.buscar()
-    
+
             if (respuesta === true) {
                 res.json(usuario)
             }
@@ -48,7 +49,7 @@ export class Main {
         try {
             const usuario = new Usuario(req.body)
             const respuesta = await usuario.insertar()
-    
+
             if (respuesta === true) {
                 res.json(usuario)
             }
@@ -67,7 +68,7 @@ export class Main {
         try {
             const usuario = new Usuario(req.body)
             const respuesta = await usuario.actualizar(req.params.documento)
-    
+
             if (respuesta === true) {
                 res.json(usuario)
             }
@@ -86,7 +87,7 @@ export class Main {
         try {
             const usuario = new Usuario(req.body)
             const respuesta = await usuario.actualizarDocumento(req.params.documento)
-    
+
             if (respuesta === true) {
                 res.json(usuario)
             }
@@ -105,7 +106,7 @@ export class Main {
         try {
             const usuario = new Usuario(req.body)
             const respuesta = await usuario.actualizarPersonales(req.params.documento)
-    
+
             if (respuesta === true) {
                 res.json(usuario)
             }
@@ -124,7 +125,7 @@ export class Main {
         try {
             const usuario = new Usuario(req.body)
             const respuesta = await usuario.actualizarClave(req.params.documento)
-    
+
             if (respuesta === true) {
                 res.json(usuario)
             }
@@ -147,7 +148,7 @@ export class Main {
             if (respuesta instanceof Error) {
                 res.json(respuesta.message)
             }
-            else{
+            else {
                 res.json(respuesta)
             }
         }
@@ -164,7 +165,7 @@ export class Main {
             if (respuesta instanceof Error) {
                 res.json(respuesta.message)
             }
-            else{
+            else {
                 res.json(respuesta)
             }
         }
@@ -181,7 +182,7 @@ export class Main {
             if (respuesta instanceof Error) {
                 res.json(respuesta.message)
             }
-            else{
+            else {
                 res.json(respuesta)
             }
         }
@@ -212,7 +213,7 @@ export class Main {
     async buscarPersonas(req, res) {
         try {
             const respuesta = await Persona.buscarTodas()
-    
+
             if (respuesta) {
                 res.json(respuesta)
             }
@@ -231,7 +232,7 @@ export class Main {
         try {
             const persona = new Persona(req.params)
             const respuesta = await persona.buscar()
-    
+
             if (respuesta === true) {
                 res.json(persona)
             }
@@ -250,7 +251,7 @@ export class Main {
         try {
             const persona = new Persona(req.body)
             const respuesta = await persona.insertar()
-    
+
             if (respuesta === true) {
                 res.json(persona)
             }
@@ -269,7 +270,7 @@ export class Main {
         try {
             const persona = new Persona(req.body)
             const respuesta = await persona.actualizar(req.params.documento)
-    
+
             if (respuesta === true) {
                 res.json(persona)
             }
@@ -288,7 +289,7 @@ export class Main {
         try {
             const persona = new Persona(req.params)
             const respuesta = await persona.eliminar()
-    
+
             if (respuesta === true) {
                 res.json(respuesta)
             }
@@ -308,9 +309,103 @@ export class Main {
     async contarReservas(req, res) {
         try {
             const respuesta = await Reserva.contarTodas()
-    
+
             if (!respuesta.error) {
                 res.json(respuesta)
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async buscarReservas(req, res) {
+        try {
+            const respuesta = await Reserva.buscarTodas()
+
+            if (respuesta) {
+                res.json(respuesta)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Reservas no encontradas" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async buscarReserva(req, res) {
+        try {
+            const reserva = new Reserva(req.params)
+            const respuesta = await reserva.buscar()
+
+            if (respuesta === true) {
+                res.json(reserva)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Reserva no encontrada" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async insertarReserva(req, res) {
+        try {
+            const reserva = new Reserva(req.body)
+            const respuesta = await reserva.insertar()
+
+            if (respuesta === true) {
+                res.json(reserva)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Reserva no insertada" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async actualizarReserva(req, res) {
+        try {
+            const reserva = new Reserva(req.body)
+            const respuesta = await reserva.actualizar(req.params.id)
+
+            if (respuesta === true) {
+                res.json(reserva)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Reserva no actualizada" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async eliminarReserva(req, res) {
+        try {
+            const reserva = new Reserva(req.params)
+            const respuesta = await reserva.eliminar()
+
+            if (respuesta === true) {
+                res.json(respuesta)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Reserva no eliminada" })
             }
             else {
                 res.json({ error: respuesta.message })
@@ -325,7 +420,7 @@ export class Main {
     async contarEventos(req, res) {
         try {
             const respuesta = await Evento.contarTodos()
-    
+
             if (!respuesta.error) {
                 res.json(respuesta)
             }
@@ -342,7 +437,7 @@ export class Main {
     async contarSolicitudes(req, res) {
         try {
             const respuesta = await Solicitud.contarTodas()
-    
+
             if (!respuesta.error) {
                 res.json(respuesta)
             }
@@ -359,9 +454,29 @@ export class Main {
     async contarContratos(req, res) {
         try {
             const respuesta = await Contrato.contarTodos()
-    
+
             if (!respuesta.error) {
                 res.json(respuesta)
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+    //#endregion
+
+    //#region Habitaciones
+    async buscarHabitaciones(req, res) {
+        try {
+            const respuesta = await Habitacion.buscarTodas()
+
+            if (respuesta) {
+                res.json(respuesta)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Habitaciones no encontradas" })
             }
             else {
                 res.json({ error: respuesta.message })

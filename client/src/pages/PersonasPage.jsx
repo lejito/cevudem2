@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 import FormPersona from '../components/FormPersona'
 
 function PersonasPage() {
-  const { notif, personas, buscarPersonas, actualizarPersona, eliminarPersona } = useAppContext()
+  const { notif, personas, buscarPersonas, eliminarPersona } = useAppContext()
 
   useEffect(() => {
     buscarPersonas()
@@ -100,7 +100,7 @@ function PersonasPage() {
         <h2
           className="my-6 text-2xl font-semibold text-dark"
         >
-          Inicio &gt; Personas
+          Personas
         </h2>
         <div className="my-6 flex mb-4">
           <Link to="./add">

@@ -780,6 +780,12 @@ print and (-ms-high-contrast:none) {
     background-color: rgba(153, 153, 153, var(--bg-opacity))
 }
 
+.hover\:color-gray:hover {
+    --color-opacity: 1;
+    color: #5f5f5f;
+    color: rgba(95, 95, 95, var(--color-opacity))
+}
+
 .focus\:bg-white:focus {
     --bg-opacity: 1;
     background-color: #fff;
