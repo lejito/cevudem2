@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2022 a las 04:06:30
+-- Tiempo de generación: 03-11-2022 a las 03:48:56
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -118,7 +118,8 @@ CREATE TABLE `contratos` (
 --
 
 INSERT INTO `contratos` (`id`, `estudiante`, `fecha_inicio`, `fecha_fin`, `apartamento`, `estado`, `observaciones`, `responsable`) VALUES
-(1, '93482848', '2022-10-01', '2023-04-01', 805, 'activo', NULL, '23457927');
+(1, '93482848', '2022-10-01', '2023-04-01', 805, 'activo', NULL, '23457927'),
+(2, '100838020', '2022-11-10', '2023-05-10', 402, 'finalizado', 'Contrato cancelado!', '100838020');
 
 -- --------------------------------------------------------
 
@@ -166,7 +167,7 @@ INSERT INTO `habitaciones` (`id`, `capacidad`, `habilitada`) VALUES
 (202, '4', 1),
 (203, '4', 1),
 (301, '2', 1),
-(302, '2', 1),
+(302, '2', 0),
 (303, '3', 1),
 (304, '3', 1);
 
@@ -220,7 +221,7 @@ CREATE TABLE `personas` (
 --
 
 INSERT INTO `personas` (`documento`, `tipo_documento`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `correo_electronico`, `telefono`, `rol`) VALUES
-('100838020', 'cc', 'Mariana', 'Andrea', 'Giraldo', 'Builez', 'mariangb2000@gmail.com', '3194020432', 'estudiante'),
+('100838020', 'cc', 'Mariana', 'Andrea', 'Giraldo', NULL, 'mariangb2000@gmail.com', '3194020432', 'estudiante'),
 ('1028458325', 'ti', 'Pepito', 'Andrés', 'Pérez', 'Bustamante', 'pepitopb@gmail.com', '3126652183', 'estudiante'),
 ('1234567', 'cc', 'Laura', 'Sofía', 'Vergara', NULL, 'laurita2849@gmail.com', '1284348', 'socio'),
 ('23457927', 'cc', 'María', 'Josefa', 'López', 'Cardona', 'majosefal@outlook.es', '3147823264', 'acudiente'),
@@ -250,8 +251,9 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `socio`, `fecha_hora_inicio`, `fecha_hora_fin`, `habitacion`, `numero_agregados`, `estado`) VALUES
-(1, '1234567', '2022-10-20 00:00:00', '2022-10-22 00:00:00', 202, '0', 'pendiente'),
-(2, '3858285', '2022-10-30 13:00:00', '2022-10-30 17:00:00', 301, '1', 'activa');
+(1, '1234567', '2022-10-31 18:10:00', '2022-11-01 06:11:00', 202, '0', 'pendiente'),
+(2, '3858285', '2022-10-08 10:10:00', '2022-10-31 14:10:00', 302, '1', 'finalizada'),
+(3, '1234567', '2022-11-02 14:00:00', '2022-11-02 16:00:00', 201, '1', 'cancelada');
 
 -- --------------------------------------------------------
 
@@ -274,8 +276,9 @@ CREATE TABLE `solicitudes` (
 INSERT INTO `solicitudes` (`id`, `estudiante`, `fecha_hora_entrevista`, `estado`, `responsable`) VALUES
 (1, '1028458325', '2022-10-12 13:00:00', 'cancelada', '59431683'),
 (2, '1028458325', '2022-10-28 08:00:00', 'pendiente', '59431683'),
-(3, '100838020', '2022-11-02 13:00:00', 'pendiente', '100838020'),
-(4, '93482848', '2022-09-08 16:00:00', 'aprobada', '23457927');
+(3, '100838020', '2022-11-02 13:00:00', 'cancelada', '100838020'),
+(4, '93482848', '2022-09-08 16:00:00', 'aprobada', '23457927'),
+(5, '100838020', '2022-11-03 14:30:00', 'aprobada', '100838020');
 
 -- --------------------------------------------------------
 
@@ -322,8 +325,7 @@ INSERT INTO `usuarios` (`documento`, `tipo_documento`, `primer_nombre`, `segundo
 ('1005566997', 'cc', 'Luis', 'Fernando', 'Aristizabal', 'Ramírez', 'laristizabal997@soyudemedellin.edu.co', '', 'administrador', 'fe008700f25cb28940ca8ed91b23b354', 0),
 ('1017933385', 'ce', 'Lorena', 'Cadavid', 'Gaviria', '', 'lcadavid385@soyudemedellin.edu.co', '333', 'administrador', 'fe008700f25cb28940ca8ed91b23b354', 0),
 ('1034503034', 'pa', 'Carlos', NULL, 'Caicedo', NULL, 'ccaicedo@gmail.com', '3146732976', 'ayudante', 'fe008700f25cb28940ca8ed91b23b354', 1),
-('987654321', 'cc', 'Marcelo', 'Andrés', 'Guerra', NULL, 'maguerra@gmail.com', '999', 'ayudante', '123x', 0),
-('999', 'cc', 'Alejandro', NULL, 'Magno', NULL, 'amagno@macedonia.com', NULL, 'administrador', NULL, 0);
+('987654321', 'cc', 'Marcelo', 'Andrés', 'Guerra', NULL, 'maguerra@gmail.com', '999', 'ayudante', '123x', 0);
 
 --
 -- Índices para tablas volcadas
@@ -415,13 +417,13 @@ ALTER TABLE `apartamentos`
 -- AUTO_INCREMENT de la tabla `contratos`
 --
 ALTER TABLE `contratos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `lugares`
@@ -433,13 +435,13 @@ ALTER TABLE `lugares`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `solicitudes`
 --
 ALTER TABLE `solicitudes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `suscripciones`
