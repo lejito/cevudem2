@@ -48,6 +48,7 @@ export const ContextProvider = ({ children }) => {
     }, [])
 
 
+    // HISTORIA DE USUARIO C7: CERRAR SESIÓN
     const logout = () => {
         localStorage.clear()
         setSesion(null)

@@ -33,6 +33,7 @@ function FormLogin() {
                     clave: md5(values.clave) // La clave se cifra en MD5
                 }
 
+                // HISTORIA DE USUARIO C6: INICIAR SESIÓN
                 const respuesta = await verificarUsuario(usuario)
 
                 if (respuesta.error) {

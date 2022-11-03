@@ -10,6 +10,8 @@ import { Apartamento } from './Apartamento.js'
 
 export class Main {
     //#region Usuarios
+
+    // HISTORIA DE USUARIO C1: VISUALIZAR CUENTAS
     async buscarUsuarios(req, res) {
         try {
             const respuesta = await Usuario.buscarTodos()
@@ -47,6 +49,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO C2: CREAR CUENTA
     async insertarUsuario(req, res) {
         try {
             const usuario = new Usuario(req.body)
@@ -85,6 +88,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO C3: ACTUALIZAR DOCUMENTO
     async actualizarUsuarioDocumento(req, res) {
         try {
             const usuario = new Usuario(req.body)
@@ -104,6 +108,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO C4: ACTUALIZAR DATOS PERSONALES
     async actualizarUsuarioPersonales(req, res) {
         try {
             const usuario = new Usuario(req.body)
@@ -123,6 +128,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO C5: ACTUALIZAR CONTRASEÑA
     async actualizarUsuarioClave(req, res) {
         try {
             const usuario = new Usuario(req.body)
@@ -141,6 +147,7 @@ export class Main {
             res.json({ error: error.message })
         }
     }
+
 
     async verificarUsuarioNumeroDocumento(req, res) {
         try {
@@ -212,6 +219,7 @@ export class Main {
     //#endregion
 
     //#region Personas
+    // HISTORIA DE USUARIO C9: VISUALIZAR PERSONAS
     async buscarPersonas(req, res) {
         try {
             const respuesta = await Persona.buscarTodas()
@@ -249,6 +257,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO C10: REGISTRAR PERSONA
     async insertarPersona(req, res) {
         try {
             const persona = new Persona(req.body)
@@ -268,6 +277,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO C11: ACTUALIZAR PERSONA
     async actualizarPersona(req, res) {
         try {
             const persona = new Persona(req.body)
@@ -323,6 +333,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO E1: VISUALIZAR RESERVAS
     async buscarReservas(req, res) {
         try {
             const respuesta = await Reserva.buscarTodas()
@@ -360,6 +371,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO E2: REGISTRAR RESERVA
     async insertarReserva(req, res) {
         try {
             const reserva = new Reserva(req.body)
@@ -379,6 +391,8 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO E3: ACTUALIZAR RESERVA
+    // HISTORIA DE USUARIO E4: CANCELAR RESERVA
     async actualizarReserva(req, res) {
         try {
             const reserva = new Reserva(req.body)
@@ -434,6 +448,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO E5: VISUALIZAR EVENTOS
     async buscarEventos(req, res) {
         try {
             const respuesta = await Evento.buscarTodos()
@@ -473,6 +488,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO E6: REGISTRAR EVENTO
     async insertarEvento(req, res) {
         try {
             const evento = new Evento(req.body)
@@ -493,6 +509,8 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO E7: ACTUALIZAR EVENTO
+    // HISTORIA DE USUARIO E8: CANCELAR EVENTO
     async actualizarEvento(req, res) {
         try {
             const evento = new Evento(req.body)
@@ -550,6 +568,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO V1: VISUALIZAR SOLICITUDES
     async buscarSolicitudes(req, res) {
         try {
             const respuesta = await Solicitud.buscarTodas()
@@ -587,6 +606,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO V2: REGISTRAR SOLICITUD
     async insertarSolicitud(req, res) {
         try {
             const solicitud = new Solicitud(req.body)
@@ -606,6 +626,9 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO V3: ACTUALIZAR SOLICITUD
+    // HISTORIA DE USUARIO V4: CANCELAR SOLICITUD
+    // HISTORIA DE USUARIO V5: APROBAR SOLICITUD
     async actualizarSolicitud(req, res) {
         try {
             const solicitud = new Solicitud(req.body)
@@ -661,6 +684,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO V6: VISUALIZAR CONTRATOS
     async buscarContratos(req, res) {
         try {
             const respuesta = await Contrato.buscarTodos()
@@ -698,6 +722,7 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO V7: INICIAR CONTRATO
     async insertarContrato(req, res) {
         try {
             const contrato = new Contrato(req.body)
@@ -717,6 +742,8 @@ export class Main {
         }
     }
 
+    // HISTORIA DE USUARIO V8: ACTUALIZAR CONTRATO
+    // HISTORIA DE USUARIO V9: FINALIZAR CONTRATO
     async actualizarContrato(req, res) {
         try {
             const contrato = new Contrato(req.body)
