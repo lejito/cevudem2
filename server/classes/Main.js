@@ -433,6 +433,105 @@ export class Main {
             res.json({ error: error.message })
         }
     }
+
+    async buscarEventos(req, res) {
+        try {
+            const respuesta = await Evento.buscarTodos()
+
+            if (respuesta) {
+                res.json(respuesta)
+            }
+            else if (respuesta === 0) {
+                res.json({ error: 'Eventos no encontrados' })
+            }
+            else {
+                res.json({ error: error.message })
+            }
+        }
+        catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async buscarEvento(req, res) {
+        try {
+            const evento = new Evento(req.params)
+            const respuesta = await evento.buscar()
+
+            if (respuesta === true) {
+                res.json(evento)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Evento no encontrado" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        }
+        catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async insertarEvento(req, res) {
+        try {
+            const evento = new Evento(req.body)
+            const respuesta = await evento.insertar()
+
+            if (respuesta === true) {
+                res.json(evento)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Evento no insertado" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        }
+        catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async actualizarEvento(req, res) {
+        try {
+            const evento = new Evento(req.body)
+            const respuesta = await evento.actualizar(req.params.id)
+
+            if (respuesta === true) {
+                res.json(evento)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Evento no actualizado" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        }
+        catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async eliminarEvento(req, res) {
+        try {
+            const evento = new Evento(req.params)
+            const respuesta = await evento.eliminar()
+
+            if (respuesta === true) {
+                res.json(respuesta)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Evento no eliminado" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        }
+        catch (error) {
+            res.json({ error: error.message })
+        }
+    }
     //#endregion
 
     //#region Solicitudes

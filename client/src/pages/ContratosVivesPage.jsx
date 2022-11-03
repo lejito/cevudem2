@@ -3,7 +3,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import { useAppContext } from '../context/Provider'
 import TableComponent from '../components/TableComponent'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserPlus, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Swal from 'sweetalert2'
 import FormContrato from '../components/FormContrato'
 
@@ -121,7 +121,7 @@ function ContratosPage() {
           <Link to="./add">
             <button className="flex items-center justify-between px-4 py-2 mb-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg hover:bg-blue-500 focus:outline-none focus:shadow-outline-purple">
               <svg className="w-4 h-4 mr-2 -ml-1" fill="currentColor" aria-hidden="true" viewBox="0 0 20 20">
-                <FontAwesomeIcon icon={faUserPlus}></FontAwesomeIcon>
+                <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
               </svg>
               <span>Añadir contrato</span>
             </button>

@@ -320,6 +320,61 @@ export const ContextProvider = ({ children }) => {
             console.log(error)
         }
     }
+
+    const [eventos, setEventos] = useState([])
+
+    async function buscarEventos() {
+        try {
+            const response = await Eventos.requestBuscarEventos()
+            setEventos(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function buscarEvento(id) {
+        try {
+            const response = await Eventos.requestBuscarEvento(id)
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function insertarEvento(datos) {
+        try {
+            const response = await Eventos.requestInsertarEvento(datos)
+            buscarEventos()
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function actualizarEvento(id, datos) {
+        try {
+            const response = await Eventos.requestActualizarEvento(id, datos)
+            buscarEventos()
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function eliminarEvento(id) {
+        try {
+            const response = await Eventos.requestEliminarEvento(id)
+            buscarEventos()
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
     //#endregion
 
     //#region Solicitudes
@@ -508,7 +563,7 @@ export const ContextProvider = ({ children }) => {
             usuarios, buscarUsuarios, buscarUsuario, insertarUsuario, actualizarUsuario, actualizarUsuarioDocumento, actualizarUsuarioPersonales, actualizarUsuarioSeguridad, verificarUsuario, verificarUsuarioDocumento, verificarUsuarioCorreo, verificarUsuarioClave,
             personas, buscarPersonas, buscarPersona, insertarPersona, actualizarPersona, eliminarPersona,
             numReservas, contarReservas, reservas, buscarReservas, buscarReserva, insertarReserva, actualizarReserva, eliminarReserva,
-            numEventos, contarEventos,
+            numEventos, contarEventos, eventos, buscarEventos, buscarEvento, insertarEvento, actualizarEvento, eliminarEvento,
             numSolicitudes, contarSolicitudes, solicitudes, buscarSolicitudes, buscarSolicitud, insertarSolicitud, actualizarSolicitud, eliminarSolicitud,
             numContratos, contarContratos, contratos, buscarContratos, buscarContrato, insertarContrato, actualizarContrato, eliminarContrato,
             lugares, buscarLugares,
