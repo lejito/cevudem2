@@ -3,96 +3,99 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useAppContext } from '../context/Provider'
 import { Form, Formik } from 'formik'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIdCard, faCalendar } from '@fortawesome/free-solid-svg-icons'
+import { faIdCard, faCalendar, faCommentDots } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment'
 
-function Options({ habitaciones }) {
+function Options({ apartamentos }) {
     return (
         <>
-            {habitaciones.map((h) => (
-                <option value={h.id} key={h.id}>{`${h.id} | Capacidad: ${h.capacidad}`}</option>
+            {apartamentos.map((a) => (
+                <option value={a.id} key={a.id}>{`${a.id} | Tipo: ${a.tipo}`}</option>
             ))}
         </>
     )
 }
 
-function FormReserva() {
+function FormContrato() {
     const params = useParams()
     const navigate = useNavigate()
-    const { notif, buscarReserva, insertarReserva, actualizarReserva, habitaciones, buscarHabitaciones } = useAppContext()
+    const { notif, buscarContrato, insertarContrato, actualizarContrato, apartamentos, buscarApartamentos } = useAppContext()
 
-    const [reserva, setReserva] = useState({
-        socio: "",
-        fecha_hora_inicio: "",
-        fecha_hora_fin: "",
-        habitacion: "",
-        numero_agregados: 0,
-        estado: "pendiente"
+    const [contrato, setContrato] = useState({
+        estudiante: "",
+        fecha_inicio: "",
+        fecha_fin: "",
+        apartamento: "",
+        estado: "activo",
+        observaciones: "",
+        responsable: ""
     })
 
     function reset() {
-        setReserva({
-            socio: "",
-            fecha_hora_inicio: "",
-            fecha_hora_fin: "",
-            habitacion: "",
-            numero_agregados: 0,
-            estado: "pendiente"
+        setContrato({
+            estudiante: "",
+            fecha_inicio: "",
+            fecha_fin: "",
+            apartamento: "",
+            estado: "activo",
+            observaciones: "",
+            responsable: ""
         })
         navigate("../")
     }
 
     useEffect(() => {
-        const cargarReserva = async () => {
+        const cargarContrato = async () => {
             if (params.id) {
-                const reserva = await buscarReserva(params.id)
+                const contrato = await buscarContrato(params.id)
 
-                setReserva({
-                    socio: reserva.socio,
-                    fecha_hora_inicio: moment(reserva.fecha_hora_inicio).format('YYYY-MM-DD HH:mm:00'),
-                    fecha_hora_fin: moment(reserva.fecha_hora_fin).format('YYYY-MM-DD HH:mm:00'),
-                    habitacion: reserva.habitacion,
-                    numero_agregados: reserva.numero_agregados,
-                    estado: reserva.estado
+                setContrato({
+                    estudiante: contrato.estudiante,
+                    fecha_inicio: moment(contrato.fecha_inicio).format('YYYY-MM-DD'),
+                    fecha_fin: moment(contrato.fecha_fin).format('YYYY-MM-DD'),
+                    apartamento: contrato.apartamento,
+                    estado: contrato.estado,
+                    observaciones: contrato.observaciones,
+                    responsable: contrato.responsable
                 })
             }
         }
 
-        cargarReserva()
-        buscarHabitaciones()
+        cargarContrato()
+        buscarApartamentos()
     }, [])
 
 
     return (
         <div className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md">
             <h4 className="mb-4 text-lg font-semibold text-gray-600 ">
-                {params.id ? `Editar reserva [${params.id}]` : "Añadir reserva"}
+                {params.id ? `Editar contrato [${params.id}]` : "Añadir contrato"}
             </h4>
 
             <Formik
-                initialValues={reserva}
+                initialValues={contrato}
                 enableReinitialize={true}
 
                 onSubmit={async (values) => {
                     if (params.id) {
-                        const respuesta = await actualizarReserva(params.id, values,)
+                        const respuesta = await actualizarContrato(params.id, values,)
 
                         if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar editar la reserva.")
+                            notif("error", "Hubo un error al intentar editar el contrato.")
                         }
                         else {
-                            notif("success", "Reserva editada correctamente.")
+                            notif("success", "Contrato editado correctamente.")
                             reset()
                         }
                     }
                     else {
-                        const respuesta = await insertarReserva(values)
+                        const respuesta = await insertarContrato(values)
 
                         if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar añadir la reserva.")
+                            notif("error", "Hubo un error al intentar añadir el contrato.")
                         }
                         else {
-                            notif("success", "Reserva añadida correctamente.")
+                            notif("success", "Contrato añadido correctamente.")
                             reset()
                         }
                     }
@@ -102,16 +105,16 @@ function FormReserva() {
                     <Form onSubmit={handleSubmit}>
                         <div className="grid gap-6 mb-4 md:grid-cols-2">
                             <label className="block text-sm">
-                                <span className="text-gray-700">Documento del socio</span>
+                                <span className="text-gray-700">Documento del estudiante</span>
                                 <div className="relative text-gray-500 focus-within:text-primary">
                                     <input
                                         className="block w-full pl-10 mt-1 text-sm text-black focus:border-primary focus:outline-none focus:shadow-outline-primary form-input"
-                                        name="socio"
+                                        name="estudiante"
                                         type="text"
                                         required
                                         onChange={handleChange}
-                                        value={values.socio}
-                                        placeholder="Documento del socio"
+                                        value={values.estudiante}
+                                        placeholder="Documento del estudiante"
                                     />
                                     <div className="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
                                         <FontAwesomeIcon icon={faIdCard} />
@@ -120,29 +123,29 @@ function FormReserva() {
                             </label>
                             <label className="block text-sm">
                                 <span className="text-gray-700 dark:text-gray-400">
-                                    Habitación
+                                    Apartamento
                                 </span>
                                 <select
                                     className="block w-full mt-1 text-sm form-select focus:border-primary focus:outline-none focus:shadow-outline-primary"
-                                    name="habitacion"
+                                    name="apartamento"
                                     required
                                     onChange={handleChange}
-                                    value={values.habitacion}
+                                    value={values.apartamento}
                                 >
-                                    <option value="" disabled>Selecciona una habitación</option>
-                                    <Options habitaciones={habitaciones} />
+                                    <option value="" disabled>Selecciona un apartamento</option>
+                                    <Options apartamentos={apartamentos} />
                                 </select>
                             </label>
                             <label className="block text-sm">
-                                <span className="text-gray-700">Fecha/hora de inicio</span>
+                                <span className="text-gray-700">Fecha de inicio</span>
                                 <div className="relative text-gray-500 focus-within:text-primary">
                                     <input
                                         className="block w-full pl-10 mt-1 text-sm text-black focus:border-primary focus:outline-none focus:shadow-outline-primary form-input"
-                                        name="fecha_hora_inicio"
-                                        type="datetime-local"
+                                        name="fecha_inicio"
+                                        type="date"
                                         required
                                         onChange={handleChange}
-                                        value={values.fecha_hora_inicio}
+                                        value={values.fecha_inicio}
                                     />
                                     <div className="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
                                         <FontAwesomeIcon icon={faCalendar} />
@@ -150,37 +153,20 @@ function FormReserva() {
                                 </div>
                             </label>
                             <label className="block text-sm">
-                                <span className="text-gray-700">Fecha/hora de fin</span>
+                                <span className="text-gray-700">Fecha de fin</span>
                                 <div className="relative text-gray-500 focus-within:text-primary">
                                     <input
                                         className="block w-full pl-10 mt-1 text-sm text-black focus:border-primary focus:outline-none focus:shadow-outline-primary form-input"
-                                        name="fecha_hora_fin"
-                                        type="datetime-local"
+                                        name="fecha_fin"
+                                        type="date"
                                         required
                                         onChange={handleChange}
-                                        value={values.fecha_hora_fin}
+                                        value={values.fecha_fin}
                                     />
                                     <div className="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
                                         <FontAwesomeIcon icon={faCalendar} />
                                     </div>
                                 </div>
-                            </label>
-                            <label className="block text-sm">
-                                <span className="text-gray-700 dark:text-gray-400">
-                                    Número de acompañantes
-                                </span>
-                                <select
-                                    className="block w-full mt-1 text-sm form-select focus:border-primary focus:outline-none focus:shadow-outline-primary"
-                                    name="numero_agregados"
-                                    required
-                                    onChange={handleChange}
-                                    value={values.numero_agregados}
-                                >
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select>
                             </label>
                             <label className="block text-sm">
                                 <span className="text-gray-700 dark:text-gray-400">
@@ -193,11 +179,41 @@ function FormReserva() {
                                     onChange={handleChange}
                                     value={values.estado}
                                 >
-                                    <option value="pendiente">Pendiente</option>
-                                    <option value="activa">Activa</option>
-                                    <option value="finalizada">Finalizada</option>
-                                    <option value="cancelada">Cancelada</option>
+                                    <option value="activo">Activo</option>
+                                    <option value="finalizado">Finalizado</option>
                                 </select>
+                            </label>
+                            <label className="block text-sm">
+                                <span className="text-gray-700">Documento del responsable</span>
+                                <div className="relative text-gray-500 focus-within:text-primary">
+                                    <input
+                                        className="block w-full pl-10 mt-1 text-sm text-black focus:border-primary focus:outline-none focus:shadow-outline-primary form-input"
+                                        name="responsable"
+                                        type="text"
+                                        required
+                                        onChange={handleChange}
+                                        value={values.responsable}
+                                        placeholder="Documento del responsable"
+                                    />
+                                    <div className="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
+                                        <FontAwesomeIcon icon={faIdCard} />
+                                    </div>
+                                </div>
+                            </label>
+                            <label className="block text-sm">
+                                <span className="text-gray-700">Observaciones</span>
+                                <div className="relative text-gray-500 focus-within:text-primary">
+                                    <textarea
+                                        className="block w-full pl-10 mt-1 text-sm text-black focus:border-primary focus:outline-none focus:shadow-outline-primary form-input"
+                                        name="observaciones"
+                                        onChange={handleChange}
+                                        value={values.observaciones}
+                                    >
+                                    </textarea>
+                                    <div className="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
+                                        <FontAwesomeIcon icon={faCommentDots} />
+                                    </div>
+                                </div>
                             </label>
                         </div>
                         <div className="flex gap-3">
@@ -224,4 +240,4 @@ function FormReserva() {
     )
 }
 
-export default FormReserva
+export default FormContrato

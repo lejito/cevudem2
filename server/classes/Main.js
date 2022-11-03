@@ -4,7 +4,9 @@ import { Reserva } from './Reserva.js'
 import { Evento } from './Evento.js'
 import { Solicitud } from './Solicitud.js'
 import { Contrato } from './Contrato.js'
+import { Lugar } from './Lugar.js'
 import { Habitacion } from './Habitacion.js'
+import { Apartamento } from './Apartamento.js'
 
 export class Main {
     //#region Usuarios
@@ -559,6 +561,120 @@ export class Main {
             res.json({ error: error.message })
         }
     }
+
+    async buscarContratos(req, res) {
+        try {
+            const respuesta = await Contrato.buscarTodos()
+
+            if (respuesta) {
+                res.json(respuesta)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Contratos no encontrados" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async buscarContrato(req, res) {
+        try {
+            const contrato = new Contrato(req.params)
+            const respuesta = await contrato.buscar()
+
+            if (respuesta === true) {
+                res.json(contrato)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Contrato no encontrado" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async insertarContrato(req, res) {
+        try {
+            const contrato = new Contrato(req.body)
+            const respuesta = await contrato.insertar()
+
+            if (respuesta === true) {
+                res.json(contrato)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Contrato no insertado" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async actualizarContrato(req, res) {
+        try {
+            const contrato = new Contrato(req.body)
+            const respuesta = await contrato.actualizar(req.params.id)
+
+            if (respuesta === true) {
+                res.json(contrato)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Contrato no actualizado" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+
+    async eliminarContrato(req, res) {
+        try {
+            const contrato = new Contrato(req.params)
+            const respuesta = await contrato.eliminar()
+
+            if (respuesta === true) {
+                res.json(respuesta)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Contrato no eliminado" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+    //#endregion
+
+    //#region Lugares
+    async buscarLugares(req, res) {
+        try {
+            const respuesta = await Lugar.buscarTodos()
+
+            if (respuesta) {
+                res.json(respuesta)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Lugares no encontrados" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
     //#endregion
 
     //#region Habitaciones
@@ -571,6 +687,26 @@ export class Main {
             }
             else if (respuesta === false) {
                 res.json({ error: "Habitaciones no encontradas" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+    //#endregion
+
+    //#region Apartamentos
+    async buscarApartamentos(req, res) {
+        try {
+            const respuesta = await Apartamento.buscarTodos()
+
+            if (respuesta) {
+                res.json(respuesta)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Apartamentos no encontrados" })
             }
             else {
                 res.json({ error: respuesta.message })

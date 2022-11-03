@@ -10,7 +10,9 @@ import reservasRoutes from './routes/reservas.routes.js'
 import eventosRoutes from './routes/eventos.routes.js'
 import solicitudesRoutes from './routes/solicitudes.routes.js'
 import contratosRoutes from './routes/contratos.routes.js'
+import lugaresRoutes from './routes/lugares.routes.js'
 import habitacionesRoutes from './routes/habitaciones.routes.js'
+import apartamentosRoutes from './routes/apartamentos.routes.js'
 
 const app = express()
 
@@ -28,7 +30,9 @@ app.use(reservasRoutes)
 app.use(eventosRoutes)
 app.use(solicitudesRoutes)
 app.use(contratosRoutes)
+app.use(lugaresRoutes)
 app.use(habitacionesRoutes)
+app.use(apartamentosRoutes)
 
 app.use(express.static(join(__dirname, '../client/dist')))
 

@@ -8,7 +8,9 @@ import * as Reservas from '../api/reservas.api'
 import * as Eventos from '../api/eventos.api'
 import * as Solicitudes from '../api/solicitudes.api'
 import * as Contratos from '../api/contratos.api'
+import * as Lugares from '../api/lugares.api'
 import * as Habitaciones from '../api/habitaciones.api'
+import * as Apartamentos from '../api/apartamentos.api'
 
 export const useAppContext = () => {
     const context = useContext(Context)
@@ -106,7 +108,7 @@ export const ContextProvider = ({ children }) => {
         }
     }
 
-    async function actualizarUsuarioDocumento (documento, datos) {
+    async function actualizarUsuarioDocumento(documento, datos) {
         try {
             const response = await Usuarios.requestActualizarUsuarioDatosDocumento(documento, datos)
             buscarUsuarios()
@@ -401,6 +403,75 @@ export const ContextProvider = ({ children }) => {
             console.log(error)
         }
     }
+
+    const [contratos, setContratos] = useState([])
+
+    async function buscarContratos() {
+        try {
+            const response = await Contratos.requestBuscarContratos()
+            setContratos(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function buscarContrato(id) {
+        try {
+            const response = await Contratos.requestBuscarContrato(id)
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function insertarContrato(datos) {
+        try {
+            const response = await Contratos.requestInsertarContrato(datos)
+            buscarContratos()
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function actualizarContrato(id, datos) {
+        try {
+            const response = await Contratos.requestActualizarContrato(id, datos)
+            buscarContratos()
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function eliminarContrato(id) {
+        try {
+            const response = await Contratos.requestEliminarContrato(id)
+            buscarContratos()
+            return response.data
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    //#endregion
+
+    //#region Lugares
+    const [lugares, setLugares] = useState([])
+
+    async function buscarLugares() {
+        try {
+            const response = await Lugares.requestBuscarLugares()
+            setLugares(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
     //#endregion
 
     //#region Habitaciones
@@ -417,6 +488,20 @@ export const ContextProvider = ({ children }) => {
     }
     //#endregion
 
+    //#region Apartamentos
+    const [apartamentos, setApartamentos] = useState([])
+
+    async function buscarApartamentos() {
+        try {
+            const response = await Apartamentos.requestBuscarApartamentos()
+            setApartamentos(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    //#endregion
+
     return (
         <Context.Provider value={{
             notif, sesion, setSesion, logout, actualizarDatosSesion,
@@ -425,8 +510,10 @@ export const ContextProvider = ({ children }) => {
             numReservas, contarReservas, reservas, buscarReservas, buscarReserva, insertarReserva, actualizarReserva, eliminarReserva,
             numEventos, contarEventos,
             numSolicitudes, contarSolicitudes, solicitudes, buscarSolicitudes, buscarSolicitud, insertarSolicitud, actualizarSolicitud, eliminarSolicitud,
-            numContratos, contarContratos,
-            habitaciones, buscarHabitaciones
+            numContratos, contarContratos, contratos, buscarContratos, buscarContrato, insertarContrato, actualizarContrato, eliminarContrato,
+            lugares, buscarLugares,
+            habitaciones, buscarHabitaciones,
+            apartamentos, buscarApartamentos
         }}>
             {children}
         </Context.Provider>
