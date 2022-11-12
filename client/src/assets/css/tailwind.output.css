@@ -738,6 +738,12 @@ print and (-ms-high-contrast:none) {
     background-color: rgba(201, 37, 52, var(--bg-opacity))
 }
 
+.bg-green {
+    --bg-opacity: 1;
+    background-color: #00a000;
+    background-color: rgba(0, 160, 0, var(--bg-opacity))
+}
+
 .bg-secondary {
     --bg-opacity: 1;
     background-color: #7a7a7a;

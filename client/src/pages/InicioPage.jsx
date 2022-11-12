@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useAppContext } from '../context/Provider'
-import { useNavigate, Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReceipt, faCalendarAlt, faClipboardList, faBuilding, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import UsersList from '../components/UsersList'

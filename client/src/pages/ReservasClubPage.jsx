@@ -7,7 +7,7 @@ import { faPlus, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Swal from 'sweetalert2'
 import FormReserva from '../components/FormReserva'
 
-function PersonasPage() {
+function ReservasClubPage() {
   const { notif, reservas, buscarReservas, eliminarReserva } = useAppContext()
 
   useEffect(() => {
@@ -133,4 +133,4 @@ function PersonasPage() {
   )
 }
 
-export default PersonasPage
+export default ReservasClubPage

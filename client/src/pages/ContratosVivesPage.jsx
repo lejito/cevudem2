@@ -7,7 +7,7 @@ import { faPlus, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Swal from 'sweetalert2'
 import FormContrato from '../components/FormContrato'
 
-function ContratosPage() {
+function ContratosVivesPage() {
   const { notif, contratos, buscarContratos, eliminarContrato } = useAppContext()
 
   useEffect(() => {
@@ -138,4 +138,4 @@ function ContratosPage() {
   )
 }
 
-export default ContratosPage
+export default ContratosVivesPage

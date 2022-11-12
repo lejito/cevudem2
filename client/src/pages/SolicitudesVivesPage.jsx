@@ -7,7 +7,7 @@ import { faPlus, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Swal from 'sweetalert2'
 import FormSolicitud from '../components/FormSolicitud'
 
-function SolicitudesPage() {
+function SolicitudesVivesPage() {
   const { notif, solicitudes, buscarSolicitudes, eliminarSolicitud } = useAppContext()
 
   useEffect(() => {
@@ -123,4 +123,4 @@ function SolicitudesPage() {
   )
 }
 
-export default SolicitudesPage
+export default SolicitudesVivesPage

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import UserCard from '../components/UserCard'
 
 function UsersList({ users }) {
@@ -8,9 +7,9 @@ function UsersList({ users }) {
     else {
         return (
             <div className="grid gap-6 mb-8 md:grid-cols-2">
-            {users.map(user => (
-                <UserCard user={user} key={user.documento} />
-            ))}
+                {users.map(user => (
+                    <UserCard user={user} key={user.documento} />
+                ))}
             </div>
         )
     }

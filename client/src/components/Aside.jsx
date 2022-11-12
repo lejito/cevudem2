@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faUsers, faReceipt, faCalendarAlt, faClipboardList, faBuilding } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faUsers, faReceipt, faCalendarAlt, faClipboardList, faBuilding, faBed, faKaaba, faDoorClosed } from '@fortawesome/free-solid-svg-icons'
 
 function Aside() {
     return (
@@ -55,6 +55,22 @@ function Aside() {
                     <li className="relative px-6 py-3">
                         <Link
                             className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray"
+                            to="/dashboard/habitaciones-club"
+                        >
+                            {useLocation().pathname === "/dashboard/habitaciones-club" ? (
+                                <span
+                                    className="absolute inset-y-0 left-0 w-1 bg-primary rounded-tr-lg rounded-br-lg"
+                                    aria-hidden="true"
+                                ></span>
+                            ) : null}
+                            <FontAwesomeIcon icon={faBed} />
+                            <span className="ml-4">Habitaciones</span>
+                        </Link>
+                    </li>
+
+                    <li className="relative px-6 py-3">
+                        <Link
+                            className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray"
                             to="/dashboard/reservas-club"
                         >
                             {useLocation().pathname === "/dashboard/reservas-club" ? (
@@ -65,6 +81,22 @@ function Aside() {
                             ) : null}
                             <FontAwesomeIcon icon={faReceipt} />
                             <span className="ml-4">Reservas</span>
+                        </Link>
+                    </li>
+
+                    <li className="relative px-6 py-3">
+                        <Link
+                            className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray"
+                            to="/dashboard/lugares-club"
+                        >
+                            {useLocation().pathname === "/dashboard/lugares-club" ? (
+                                <span
+                                    className="absolute inset-y-0 left-0 w-1 bg-primary rounded-tr-lg rounded-br-lg"
+                                    aria-hidden="true"
+                                ></span>
+                            ) : null}
+                            <FontAwesomeIcon icon={faKaaba} />
+                            <span className="ml-4">Lugares</span>
                         </Link>
                     </li>
 
@@ -87,6 +119,22 @@ function Aside() {
                     <div className="a-section">
                         <span>Viviendas Vives</span>
                     </div>
+
+                    <li className="relative px-6 py-3">
+                        <Link
+                            className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray"
+                            to="/dashboard/apartamentos-vives"
+                        >
+                            {useLocation().pathname === "/dashboard/apartamentos-vives" ? (
+                                <span
+                                    className="absolute inset-y-0 left-0 w-1 bg-primary rounded-tr-lg rounded-br-lg"
+                                    aria-hidden="true"
+                                ></span>
+                            ) : null}
+                            <FontAwesomeIcon icon={faDoorClosed} />
+                            <span className="ml-4">Apartamentos</span>
+                        </Link>
+                    </li>
 
                     <li className="relative px-6 py-3">
                         <Link

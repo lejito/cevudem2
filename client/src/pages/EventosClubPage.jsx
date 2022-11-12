@@ -7,7 +7,7 @@ import { faPlus, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Swal from 'sweetalert2'
 import FormEvento from '../components/FormEvento'
 
-function PersonasPage() {
+function EventosClubPage() {
   const { notif, eventos, buscarEventos, eliminarEvento } = useAppContext()
 
   useEffect(() => {
@@ -133,4 +133,4 @@ function PersonasPage() {
   )
 }
 
-export default PersonasPage
+export default EventosClubPage

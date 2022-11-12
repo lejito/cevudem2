@@ -6,8 +6,11 @@ import InicioPage from '../pages/InicioPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import AjustesPage from '../pages/AjustesPage'
 import PersonasPage from '../pages/PersonasPage'
+import HabitacionesClubPage from '../pages/HabitacionesClubPage'
 import ReservasClubPage from '../pages/ReservasClubPage'
+import LugaresClubPage from '../pages/LugaresClubPage'
 import EventosClubPage from '../pages/EventosClubPage'
+import ApartamentosVivesPage from '../pages/ApartamentosVivesPage'
 import SolicitudesVivesPage from '../pages/SolicitudesVivesPage'
 import ContratosVivesPage from '../pages/ContratosVivesPage'
 import Aside from './Aside'
@@ -38,8 +41,11 @@ function Dashboard() {
                         <Route path="/*" element={<InicioPage />} />
                         <Route path="/ajustes" element={<AjustesPage />} />
                         <Route path="/personas/*" element={<PersonasPage />} />
+                        <Route path="/habitaciones-club" element={<HabitacionesClubPage />} />
                         <Route path="/reservas-club/*" element={<ReservasClubPage />} />
+                        <Route path="/lugares-club" element={<LugaresClubPage />} />
                         <Route path="/eventos-club/*" element={<EventosClubPage />} />
+                        <Route path="/apartamentos-vives" element={<ApartamentosVivesPage />} />
                         <Route path="/solicitudes-vives/*" element={<SolicitudesVivesPage />} />
                         <Route path="/contratos-vives/*" element={<ContratosVivesPage />} />
                         <Route path="*" element={<NotFoundPage />} />
