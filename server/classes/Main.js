@@ -783,26 +783,6 @@ export class Main {
     }
     //#endregion
 
-    //#region Lugares
-    async buscarLugares(req, res) {
-        try {
-            const respuesta = await Lugar.buscarTodos()
-
-            if (respuesta) {
-                res.json(respuesta)
-            }
-            else if (respuesta === false) {
-                res.json({ error: "Lugares no encontrados" })
-            }
-            else {
-                res.json({ error: respuesta.message })
-            }
-        } catch (error) {
-            res.json({ error: error.message })
-        }
-    }
-    //#endregion
-
     //#region Habitaciones
     async buscarHabitaciones(req, res) {
         try {
@@ -813,6 +793,27 @@ export class Main {
             }
             else if (respuesta === false) {
                 res.json({ error: "Habitaciones no encontradas" })
+            }
+            else {
+                res.json({ error: respuesta.message })
+            }
+        } catch (error) {
+            res.json({ error: error.message })
+        }
+    }
+    
+    //#endregion
+
+    //#region Lugares
+    async buscarLugares(req, res) {
+        try {
+            const respuesta = await Lugar.buscarTodos()
+
+            if (respuesta) {
+                res.json(respuesta)
+            }
+            else if (respuesta === false) {
+                res.json({ error: "Lugares no encontrados" })
             }
             else {
                 res.json({ error: respuesta.message })

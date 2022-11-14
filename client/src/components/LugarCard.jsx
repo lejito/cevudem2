@@ -5,12 +5,12 @@ function LugarCard({ lugar }) {
     let bgCard = ""
     let detail = ""
 
-    if (lugar.habilitado == 0) {
+    if (lugar.habilitado == null) {
         bgCard = "bg-secondary"
         detail = "Deshabilitado"
     }
     else {
-        if (lugar.disponible == false) {
+        if (lugar.disponible == null) {
             bgCard = "bg-primary"
             detail = "No disponible"
         }

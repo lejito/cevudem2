@@ -6,12 +6,13 @@ export class Lugar {
         this.nombre = l.nombre ? l.nombre : null
         this.capacidad = l.capacidad ? l.capacidad : null
         this.habilitado = l.habilitado ? l.habilitado : null
+        this.disponible =l.disponible ? l.disponible : null
     }
 
     static async buscarTodos() {
         try {
             const [result] = await Pool.query(
-                "SELECT id, nombre, capacidad, habilitado FROM lugares ORDER BY id ASC"
+                "SELECT id, nombre, capacidad, habilitado, !EXISTS(SELECT * FROM eventos WHERE lugar = lugares.id AND fecha_hora_inicio < CURRENT_TIMESTAMP AND CURRENT_TIMESTAMP < fecha_hora_fin) as disponible FROM lugares"
             )
 
             if (result.length === 0) {

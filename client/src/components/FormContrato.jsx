@@ -10,7 +10,7 @@ function Options({ apartamentos }) {
     return (
         <>
             {apartamentos.map((a) => (
-                <option value={a.id} key={a.id}>{`${a.id} | Tipo: ${a.tipo}`}</option>
+                <option value={a.id} key={a.id}>{`${a.id} | Tipo: ${a.tipo} | ${a.disponible != null ? "[Disponible]" : "[No disponible]"}`}</option>
             ))}
         </>
     )

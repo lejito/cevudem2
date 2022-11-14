@@ -3,20 +3,10 @@ import { useAppContext } from '../context/Provider'
 import HabitacionesList from '../components/HabitacionesList'
 
 function HabitacionesClubPage() {
-    //const {x} = useAppContext()
-
-    const habitaciones = [
-        { id: 201, capacidad: 4, disponible: false, habilitada: 1},
-        { id: 202, capacidad: 4, disponible: true, habilitada: 1},
-        { id: 203, capacidad: 4, disponible: true, habilitada: 1},
-        { id: 301, capacidad: 2, disponible: false, habilitada: 1},
-        { id: 302, capacidad: 2, disponible: true, habilitada: 0},
-        { id: 303, capacidad: 3, disponible: true, habilitada: 1},
-        { id: 304, capacidad: 3, disponible: true, habilitada: 1}
-    ]
+    const { habitaciones, buscarHabitaciones } = useAppContext()
 
     useEffect(() => {
-
+        buscarHabitaciones()
     }, [])
 
     return (

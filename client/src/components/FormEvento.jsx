@@ -10,7 +10,7 @@ function Options({ lugares }) {
     return (
         <>
             {lugares.map((l) => (
-                <option value={l.id} key={l.id}>{`${l.nombre} | Capacidad: ${l.capacidad}`}</option>
+                <option value={l.id} key={l.id}>{`${l.nombre} | Capacidad: ${l.capacidad} | ${l.disponible != null ? "[Disponible]" : "[No disponible]"}`}</option>
             ))}
         </>
     )

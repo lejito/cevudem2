@@ -516,20 +516,6 @@ export const ContextProvider = ({ children }) => {
     }
     //#endregion
 
-    //#region Lugares
-    const [lugares, setLugares] = useState([])
-
-    async function buscarLugares() {
-        try {
-            const response = await Lugares.requestBuscarLugares()
-            setLugares(response.data)
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
-    //#endregion
-
     //#region Habitaciones
     const [habitaciones, setHabitaciones] = useState([])
 
@@ -537,6 +523,20 @@ export const ContextProvider = ({ children }) => {
         try {
             const response = await Habitaciones.requestBuscarHabitaciones()
             setHabitaciones(response.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    //#endregion
+
+    //#region Lugares
+    const [lugares, setLugares] = useState([])
+
+    async function buscarLugares() {
+        try {
+            const response = await Lugares.requestBuscarLugares()
+            setLugares(response.data)
         }
         catch (error) {
             console.log(error)
@@ -567,8 +567,8 @@ export const ContextProvider = ({ children }) => {
             numEventos, contarEventos, eventos, buscarEventos, buscarEvento, insertarEvento, actualizarEvento, eliminarEvento,
             numSolicitudes, contarSolicitudes, solicitudes, buscarSolicitudes, buscarSolicitud, insertarSolicitud, actualizarSolicitud, eliminarSolicitud,
             numContratos, contarContratos, contratos, buscarContratos, buscarContrato, insertarContrato, actualizarContrato, eliminarContrato,
-            lugares, buscarLugares,
             habitaciones, buscarHabitaciones,
+            lugares, buscarLugares,
             apartamentos, buscarApartamentos
         }}>
             {children}

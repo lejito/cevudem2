@@ -5,12 +5,12 @@ function HabitacionCard({ habitacion }) {
     let bgCard = ""
     let detail = ""
 
-    if (habitacion.habilitada == 0) {
+    if (habitacion.habilitada == null) {
         bgCard = "bg-secondary"
         detail = "Deshabilitada"
     }
     else {
-        if (habitacion.disponible == false) {
+        if (habitacion.disponible == null) {
             bgCard = "bg-primary"
             detail = "No disponible"
         }
