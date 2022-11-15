@@ -74,26 +74,31 @@ function FormEvento() {
                 enableReinitialize={true}
 
                 onSubmit={async (values) => {
-                    if (params.id) {
-                        const respuesta = await actualizarEvento(params.id, values,)
-
-                        if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar editar el evento.")
-                        }
-                        else {
-                            notif("success", "Evento editado correctamente.")
-                            reset()
-                        }
+                    if (values.fecha_hora_inicio > values.fecha_hora_fin) {
+                        notif("warning", "La fecha/hora de inicio no puede ser mayor a la fecha/hora de fin.")
                     }
                     else {
-                        const respuesta = await insertarEvento(values)
+                        if (params.id) {
+                            const respuesta = await actualizarEvento(params.id, values,)
 
-                        if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar añadir el evento.")
+                            if (respuesta.error) {
+                                notif("error", "Hubo un error al intentar editar el evento.")
+                            }
+                            else {
+                                notif("success", "Evento editado correctamente.")
+                                reset()
+                            }
                         }
                         else {
-                            notif("success", "Evento añadido correctamente.")
-                            reset()
+                            const respuesta = await insertarEvento(values)
+
+                            if (respuesta.error) {
+                                notif("error", "Hubo un error al intentar añadir el evento.")
+                            }
+                            else {
+                                notif("success", "Evento añadido correctamente.")
+                                reset()
+                            }
                         }
                     }
                 }}

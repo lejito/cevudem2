@@ -74,26 +74,31 @@ function FormReserva() {
                 enableReinitialize={true}
 
                 onSubmit={async (values) => {
-                    if (params.id) {
-                        const respuesta = await actualizarReserva(params.id, values,)
-
-                        if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar editar la reserva.")
-                        }
-                        else {
-                            notif("success", "Reserva editada correctamente.")
-                            reset()
-                        }
+                    if (values.fecha_hora_inicio > values.fecha_hora_fin) {
+                        notif("warning", "La fecha/hora de inicio no puede ser mayor a la fecha/hora de fin.")
                     }
                     else {
-                        const respuesta = await insertarReserva(values)
+                        if (params.id) {
+                            const respuesta = await actualizarReserva(params.id, values,)
 
-                        if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar añadir la reserva.")
+                            if (respuesta.error) {
+                                notif("error", "Hubo un error al intentar editar la reserva.")
+                            }
+                            else {
+                                notif("success", "Reserva editada correctamente.")
+                                reset()
+                            }
                         }
                         else {
-                            notif("success", "Reserva añadida correctamente.")
-                            reset()
+                            const respuesta = await insertarReserva(values)
+
+                            if (respuesta.error) {
+                                notif("error", "Hubo un error al intentar añadir la reserva.")
+                            }
+                            else {
+                                notif("success", "Reserva añadida correctamente.")
+                                reset()
+                            }
                         }
                     }
                 }}

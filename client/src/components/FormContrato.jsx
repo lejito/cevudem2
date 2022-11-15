@@ -77,26 +77,31 @@ function FormContrato() {
                 enableReinitialize={true}
 
                 onSubmit={async (values) => {
-                    if (params.id) {
-                        const respuesta = await actualizarContrato(params.id, values,)
-
-                        if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar editar el contrato.")
-                        }
-                        else {
-                            notif("success", "Contrato editado correctamente.")
-                            reset()
-                        }
+                    if (values.fecha_inicio > values.fecha_fin) {
+                        notif("warning", "La fecha de inicio no puede ser mayor a la fecha de fin.")
                     }
                     else {
-                        const respuesta = await insertarContrato(values)
+                        if (params.id) {
+                            const respuesta = await actualizarContrato(params.id, values,)
 
-                        if (respuesta.error) {
-                            notif("error", "Hubo un error al intentar añadir el contrato.")
+                            if (respuesta.error) {
+                                notif("error", "Hubo un error al intentar editar el contrato.")
+                            }
+                            else {
+                                notif("success", "Contrato editado correctamente.")
+                                reset()
+                            }
                         }
                         else {
-                            notif("success", "Contrato añadido correctamente.")
-                            reset()
+                            const respuesta = await insertarContrato(values)
+
+                            if (respuesta.error) {
+                                notif("error", "Hubo un error al intentar añadir el contrato.")
+                            }
+                            else {
+                                notif("success", "Contrato añadido correctamente.")
+                                reset()
+                            }
                         }
                     }
                 }}
